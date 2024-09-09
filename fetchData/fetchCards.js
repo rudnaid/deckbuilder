@@ -14,7 +14,7 @@ const getCardsByClass = async (selectedClass) => {
     const response = await fetch(url, options);
     const result = await response.json();
     console.log("f start");
-    fs.writeFileSync("./data.json", JSON.stringify(result), null, 2);
+    fs.writeFileSync("./data.json", JSON.stringify(result, null, 2));
     console.log("f end");
   } catch (error) {
     console.error(error);
