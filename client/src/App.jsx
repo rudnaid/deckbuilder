@@ -1,5 +1,5 @@
 import './App.css'
-import CardDisplay from './components/CardDisplay'
+import DeckBuilder from './components/DeckBuilder'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
     <Navbar />
-    <CardDisplay />
+    <DeckBuilder />
     </>
   )
 }

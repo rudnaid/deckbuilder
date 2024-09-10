@@ -21,7 +21,7 @@ function Card({ card }) {
       className={isDragging ? "active-drag" : "card"}
     >
       {isDragging ? 'DRAG' : 'card'}
-      <img src={card.image}></img>
+      <img src={card.image} width="269" height="372" ></img>
     </div>
   );
 }
