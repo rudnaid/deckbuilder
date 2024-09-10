@@ -1,10 +1,10 @@
-import Card from './Card';
+import CardsContainer from './CardsContainer';
 
 function CardDisplay() {
   return (
     <>
       <div className="card-display">
-        <Card />
+        <CardsContainer />
       </div>
     </>
   )

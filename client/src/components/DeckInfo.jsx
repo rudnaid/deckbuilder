@@ -1,7 +1,9 @@
-function DeckInfo() {
+function DeckInfo({ deck }) {
   return (
     <div className="deckinfo">
-      <div>deckinfo-placehoder</div>
+      {deck.map((card) => (
+        <div key={card.id}>{card.name}</div>
+      ))}
     </div>
   )
 }
