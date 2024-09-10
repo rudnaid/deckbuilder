@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Card from './Card';
 
 function CardDisplay() {
     const [cards, setCards] = useState([])
@@ -11,7 +12,7 @@ function CardDisplay() {
   return (
     <>
       <div className="card-display">
-        <div>card-placeholder</div>
+        <Card />
       </div>
     </>
   )
