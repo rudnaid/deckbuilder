@@ -1,5 +1,4 @@
 import { Fragment, useState } from "react";
-import App from "../App.jsx";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -10,7 +9,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      await fetch("/api/register", {
+      await fetch("/api/user/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: username, password: password }),

@@ -11,7 +11,7 @@ export function Login(isLogin) {
     e.preventDefault();
 
     try {
-      const data = await fetch("/api/validatelogin", {
+      const data = await fetch("/api/user/validatelogin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
