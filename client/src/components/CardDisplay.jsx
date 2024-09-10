@@ -1,8 +1,10 @@
+import Card from './Card';
+
 function CardDisplay() {
   return (
     <>
       <div className="card-display">
-        <div>card-placeholder</div>
+        <Card />
       </div>
     </>
   )
