@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import Card from './Card';
-import useFetchData from '../Hooks/useFetchData';
+import useFetchData from '../hooks/useFetchData';
 import FilterSettings from './FilterSettings';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 function CardDisplay() {
     const [cards, setCards]=useState(null)
-    const {data, loading, error} = useFetchData('http://localhost:3000/api/cards');
+    const [page, setPage] = useState(1);
+    const {data, loading, error} = useFetchData(`http://localhost:3000/api/cards?page=${page}&limit=20`);
 
     if (!cards) {
         setCards(data)
@@ -16,7 +18,7 @@ function CardDisplay() {
     if(error){
         return <div>{error}</div>
     }
-
+    console.log(data)
   return (
     <>
         <FilterSettings />
