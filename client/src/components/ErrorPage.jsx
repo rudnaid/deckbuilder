@@ -1,4 +1,10 @@
-import { Link } from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
 
 export default function ErrorPage() {
   return (

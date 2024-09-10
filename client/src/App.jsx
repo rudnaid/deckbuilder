@@ -1,14 +1,14 @@
 import './App.css'
-import CardDisplay from './components/CardDisplay'
-import Navbar from './components/Navbar'
+import DeckBuilder from './components/DeckBuilder';
+import { Login } from './components/Login';
+import Navbar from './components/Navbar';
 
 function App() {
 
   return (
-    <>
-    <Navbar />
-    <CardDisplay />
-    </>
+      <div>
+        <Login></Login>
+      </div>
   )
 }
 
