@@ -3,6 +3,8 @@ import Card from './Card';
 import useFetchData from '../hooks/useFetchData';
 import FilterSettings from './FilterSettings';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import CardsContainer from './CardsContainer';
+
 function CardDisplay() {
     const [cards, setCards]=useState(null)
     const [page, setPage] = useState(1);
@@ -23,7 +25,7 @@ function CardDisplay() {
     <>
         <FilterSettings />
       <div className="card-display">
-        <Card />
+        <CardsContainer />
       </div>
     </>
   )
