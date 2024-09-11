@@ -23,9 +23,8 @@ function CardDisplay() {
         return <div>{error}</div>
     }
     console.log(data)
-  return (''
+  return (
     <>
-        {/* <FilterSettings /> */}
       <div className="card-display">
         <CardsContainer cards={filteredData}/>
       </div>
