@@ -9,3 +9,5 @@ const filterRouter = Router();
 filterRouter.get("/api/filter/:class/:type/:rarity/:manacost", async (req,res) =>{
 
 })
+
+export default filterRouter;
