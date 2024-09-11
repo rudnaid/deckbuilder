@@ -1,32 +1,51 @@
-import { useEffect, useState } from 'react';
-import Card from './Card';
-import useFetchData from '../hooks/useFetchData';
-import FilterSettings from './FilterSettings';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { useEffect } from 'react';
 import CardsContainer from './CardsContainer';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from "react-intersection-observer"
 
 function CardDisplay() {
-    const [cards, setCards]=useState(null)
-    const [page, setPage] = useState(1);
-    const {data, loading, error} = useFetchData(`http://localhost:3000/api/cards?page=${page}&limit=20`);
 
-    
-    if (!cards) {
-        setCards(data)
+  const LIMIT = 20; 
+  const fetchCards = async ({ pageParam = 1 }) => {
+    const response = await fetch(`/api/cards?page=${pageParam}&limit=${LIMIT}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
+    const newCards = await response.json();
+    return newCards;
+  };
+  
+  const { data, error, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
+    queryKey: ['cards'],
+    queryFn: fetchCards,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.length === LIMIT ? allPages.length + 1 : undefined;
+    },
+  })
 
-    if(loading){
-        return <div>loading...</div>
+  const { ref, inView } = useInView()
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
     }
-    if(error){
-        return <div>{error}</div>
-    }
-    console.log(data)
+  }, [fetchNextPage, inView])
+
+  console.log(data)
+  if (status === 'pending') {
+    return <div>loading...</div>
+  }
+  if (status === 'error') {
+    return <div>{error.message}</div>
+  }
+
+  const allCards=data.pages.flat();
   return (
     <>
-        <FilterSettings />
       <div className="card-display">
-        <CardsContainer cards={data}/>
+        <CardsContainer cards={allCards} />
+        <div ref={ref} style={{ height: '1px' }}>{isFetchingNextPage && 'loading'}</div>
       </div>
     </>
   )

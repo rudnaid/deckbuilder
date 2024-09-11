@@ -9,11 +9,12 @@ import "./index.css";
 import DeckBuilder from "./components/DeckBuilder.jsx";
 import CardDisplay from "./components/CardDisplay.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
     errorElement: <ErrorPage />,
   },
   {
@@ -28,8 +29,11 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient()
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>
 );
