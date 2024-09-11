@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDrop } from "react-dnd";
+import './Stash.css';
 
 function Stash() {
   const [cardsInStash, setCardsInStash] = useState([]);

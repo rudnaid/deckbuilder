@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useDrop } from "react-dnd";
+import './Deck.css';
+
 
 function Deck({ onDrop }) {
   const [cardsInDeck, setCardsInDeck] = useState([]);
@@ -18,8 +20,7 @@ function Deck({ onDrop }) {
   }));
 
   return (
-    <div className="deck">
-      <div
+      <div className="deck"
         ref={drop}
         style={{
           height: '200px',
@@ -41,7 +42,6 @@ function Deck({ onDrop }) {
           ))}
         </ul>
       </div>
-    </div>
   );
 };
 

@@ -1,0 +1,7 @@
+.filter-settings {
+  grid-column: 1;
+  grid-row: 1;
+  background-color: #f4f4f4;
+  height: 100%;
+  overflow: auto;
+}

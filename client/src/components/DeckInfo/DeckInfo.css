@@ -1,0 +1,8 @@
+.deckinfo {
+  grid-column: 3;
+  grid-row: 1;
+  background-color: #f4f4f4;
+  max-height: fit-content;
+  overflow: auto;
+  color: 'black';
+}

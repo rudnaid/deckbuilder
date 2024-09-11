@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
-import Card from './Card';
-import useFetchData from '../hooks/useFetchData';
-import FilterSettings from './FilterSettings';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import CardsContainer from './CardsContainer';
+import useFetchData from '../../hooks/useFetchData';
+import FilterSettings from '../FilterSettings/FilterSettings.jsx';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver'; 
+import CardsContainer from '../CardsContainer/CardsContainer';
+import './CardDisplay.css';
 
 function CardDisplay() {
     const [cards, setCards]=useState(null)
     const [page, setPage] = useState(1);
     const {data, loading, error} = useFetchData(`http://localhost:3000/api/cards?page=${page}&limit=20`);
 
+    
     if (!cards) {
         setCards(data)
     }
@@ -23,9 +24,9 @@ function CardDisplay() {
     console.log(data)
   return (
     <>
-        <FilterSettings />
+        {/* <FilterSettings /> */}
       <div className="card-display">
-        <CardsContainer />
+        <CardsContainer cards={data}/>
       </div>
     </>
   )
