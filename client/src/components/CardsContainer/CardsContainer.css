@@ -1,0 +1,13 @@
+.cards-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 50px));
+	gap: 10px;
+	overflow-y: scroll;
+  scrollbar-width: none;
+  /* overflow-x: hidden; */
+}
+
+/* .cards-container::-webkit-scrollbar {
+	display: none;
+} */
+
