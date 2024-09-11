@@ -10,6 +10,7 @@ function CardDisplay() {
     const [page, setPage] = useState(1);
     const {data, loading, error} = useFetchData(`http://localhost:3000/api/cards?page=${page}&limit=20`);
 
+    const [filteredData, setFilteredData] = useState(data);
     
     if (!cards) {
         setCards(data)
@@ -22,11 +23,11 @@ function CardDisplay() {
         return <div>{error}</div>
     }
     console.log(data)
-  return (
+  return (''
     <>
         {/* <FilterSettings /> */}
       <div className="card-display">
-        <CardsContainer cards={data}/>
+        <CardsContainer cards={filteredData}/>
       </div>
     </>
   )
