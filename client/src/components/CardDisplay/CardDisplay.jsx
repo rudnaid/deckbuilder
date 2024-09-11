@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import Card from './Card';
-import useFetchData from '../hooks/useFetchData';
-import FilterSettings from './FilterSettings';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import CardsContainer from './CardsContainer';
+import useFetchData from '../../hooks/useFetchData';
+import FilterSettings from '../FilterSettings/FilterSettings.jsx';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver'; 
+import CardsContainer from '../CardsContainer/CardsContainer';
+import './CardDisplay.css';
 
 function CardDisplay() {
     const [cards, setCards]=useState(null)
@@ -23,9 +23,8 @@ function CardDisplay() {
         return <div>{error}</div>
     }
     console.log(data)
-  return (''
+  return (
     <>
-        <FilterSettings onFilter={setFilteredData}/>
       <div className="card-display">
         <CardsContainer cards={filteredData}/>
       </div>

@@ -1,4 +1,5 @@
 import { useDrag } from 'react-dnd';
+import './Card.css';
 
 function Card({ card }) {
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -13,15 +14,13 @@ function Card({ card }) {
     <div
       ref={drag}
       style={{
-        opacity: isDragging ? 0.5 : 1,
-        padding: '8px',
-        border: '1px solid gray',
-        marginBottom: '4px'
+        opacity: isDragging ? 0.5 : 1
+
+        
       }}
-      className={isDragging ? "active-drag" : "card"}
+      className={"card"}
     >
-      {isDragging ? 'DRAG' : 'card'}
-      <img src={card.image}></img>
+      <img src={card.img}  ></img>
     </div>
   );
 }

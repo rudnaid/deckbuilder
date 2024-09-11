@@ -1,0 +1,17 @@
+.cards-container {
+  /* position: fixed; */
+  top: 50px;
+  bottom: 200px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 50px));
+	gap: 10px;
+	max-height: 800px;
+	overflow-y: scroll;
+  scrollbar-width: none;
+  /* overflow-x: hidden; */
+}
+
+/* .cards-container::-webkit-scrollbar {
+	display: none;
+} */
+

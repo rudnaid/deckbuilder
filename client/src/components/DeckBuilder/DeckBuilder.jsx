@@ -1,10 +1,12 @@
-import CardDisplay from "./CardDisplay";
-import Stash from "./Stash";
-import Deck from "./Deck";
-import DeckInfo from "./DeckInfo";
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useState } from "react";
+import CardDisplay from "../CardDisplay/CardDisplay.jsx";
+import Stash from "../Stash/Stash.jsx";
+import Deck from "../Deck/Deck.jsx";
+import DeckInfo from "../Deckinfo/Deckinfo.jsx"
+import FilterSettings from "../FilterSettings/FilterSettings.jsx";
+import './DeckBuilder.css';
 
 function DeckBuilder() {
   const [cardsInDeck, setCardsInDeck] = useState([]);
@@ -15,11 +17,14 @@ function DeckBuilder() {
 
   return (
     <div className="deck-builder">
+      <FilterSettings />
       <DndProvider backend={HTML5Backend}>
         <CardDisplay />
-        <Stash />
-        <Deck onDrop={handleDrop} />
         <DeckInfo deck={cardsInDeck} />
+        <div className="bottom-container">
+          <Stash />
+          <Deck onDrop={handleDrop} />
+        </div>
       </DndProvider>
     </div>
   )

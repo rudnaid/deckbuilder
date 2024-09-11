@@ -6,14 +6,14 @@ import {
 } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
-import DeckBuilder from "./components/DeckBuilder.jsx";
-import CardDisplay from "./components/CardDisplay.jsx";
+import DeckBuilder from "./components/DeckBuilder/DeckBuilder.jsx";
+import CardDisplay from "./components/CardDisplay/CardDisplay.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
     errorElement: <ErrorPage />,
   },
   {
