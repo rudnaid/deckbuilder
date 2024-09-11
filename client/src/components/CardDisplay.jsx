@@ -23,7 +23,7 @@ function CardDisplay() {
         return <div>{error}</div>
     }
     console.log(data)
-  return (
+  return (''
     <>
         <FilterSettings onFilter={setFilteredData}/>
       <div className="card-display">
