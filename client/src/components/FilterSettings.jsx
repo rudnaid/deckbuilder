@@ -1,8 +1,7 @@
 import React from 'react'
 
+function FilterSettings(onFilter, filteredData) {
 
-
-function FilterSettings() {
   return (
     <div>FilterSettings</div>
   )
