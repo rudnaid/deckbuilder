@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import CardsContainer from './CardsContainer';
+import CardsContainer from '../CardsContainer/CardsContainer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from "react-intersection-observer"
 
@@ -41,6 +41,8 @@ function CardDisplay() {
   }
 
   const allCards=data.pages.flat();
+  console.log('helo' + allCards);
+  
   return (
     <>
       <div className="card-display">

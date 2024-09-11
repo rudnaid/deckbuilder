@@ -20,7 +20,7 @@ function Card({ card }) {
       }}
       className={"card"}
     >
-      <img src={card.img}  ></img>
+      <img src={card.image}  ></img>
     </div>
   );
 }
