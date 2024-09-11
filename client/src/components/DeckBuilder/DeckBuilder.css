@@ -27,22 +27,19 @@
 } */
 
 .deck-builder {
-  position: relative;
-  grid-row: 1;
   display: grid;
   grid-template-columns: 200px 1fr 200px;
   grid-template-rows: 3fr 1fr;
   max-width: 100vw;
-  /* max-height: 100vh; */
-  /* margin-bottom: 1px; */
-  /* margin: 1fr; */
+
 }
 
 .bottom-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* gap: 10px; */
   background-color: #eaeaea;
   min-width: 100vw;
+  position: fixed;
+  bottom: 0;
 
 }

@@ -1,11 +1,3 @@
-#root {
-  /* max-width: 1280px; */
-  /* margin: 1px; */
-  /* padding: 2rem; */
-  /* height: 100vh; */
-  /* width: 80vw; */
-}
-
 .main-content {
   display: flex;
   flex-direction: column;
