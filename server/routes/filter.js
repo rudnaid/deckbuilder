@@ -3,9 +3,9 @@ import Card from "../model/Card.js";
 
 const filterRouter = Router();
 
-//classok 14-ig vannak
-//
-
-filterRouter.get("/api/filter/:class/:type/:rarity/:manacost", async (req,res) =>{
-
-})
+filterRouter.get(
+  "/api/filter/:classId/:type/:rarity/:manaCost",
+  async (req, res) => {
+    const { classId, type, rarity, manaCost } = req.params;
+  }
+);
