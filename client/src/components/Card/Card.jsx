@@ -15,8 +15,6 @@ function Card({ card }) {
       ref={drag}
       style={{
         opacity: isDragging ? 0.5 : 1
-
-        
       }}
       className={"card"}
     >

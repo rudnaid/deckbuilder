@@ -1,5 +1,6 @@
 import React from 'react'
 import './FilterSettings.css';
+import ClassSelector from '../ClassSelector/ClassSelector';
 
 
 

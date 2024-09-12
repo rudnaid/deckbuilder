@@ -1,7 +1,7 @@
 import { Router } from "express";
 import Card from "../model/Card.js"
 
-const cardsRouter = Router()
+const cardsRouter = Router();
 
 cardsRouter.get('/', async (req, res) => {
     try {
@@ -14,4 +14,4 @@ cardsRouter.get('/', async (req, res) => {
         res.status(404).json({ error: 'File not found' })
     }
 })
-export default cardsRouter
+export default cardsRouter;

@@ -32,7 +32,6 @@ function CardDisplay() {
     }
   }, [fetchNextPage, inView])
 
-  console.log(data)
   if (status === 'pending') {
     return <div>loading...</div>
   }
@@ -41,7 +40,6 @@ function CardDisplay() {
   }
 
   const allCards=data.pages.flat();
-  console.log('helo' + allCards);
   
   return (
     <>
