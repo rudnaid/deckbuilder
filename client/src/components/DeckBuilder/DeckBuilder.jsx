@@ -2,7 +2,6 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useState } from "react";
 import CardDisplay from "../CardDisplay/CardDisplay.jsx";
-import Stash from "../Stash/Stash.jsx";
 import Deck from "../Deck/Deck.jsx";
 import DeckInfo from "../DeckInfo/DeckInfo.jsx"
 import ClassSelector from "../ClassSelector/ClassSelector.jsx"
@@ -12,8 +11,8 @@ import './DeckBuilder.css';
 function DeckBuilder() {
   const [cardsInDeck, setCardsInDeck] = useState([]);
   const [selectedClass, setSelectedClass] = useState();
-  const [queryString, setQueryString] = useState();
-
+  const [filterQueryString, setFilterQueryString] = useState();
+  console.log(filterQueryString)
   const handleDrop = (item) => {
     setCardsInDeck((prev) => [...prev, item.card]);
   };
@@ -21,14 +20,17 @@ function DeckBuilder() {
   function handleSelect(chosenClass) {
     setSelectedClass(`&classId=${chosenClass}`);
   }
+  if (filterQueryString){
+
+  }
 
   return (
     <div className="deck-builder">
-      <FilterSettings updateData={setQueryString}/>
+      <FilterSettings setFilter={setFilterQueryString}/>
       <DndProvider backend={HTML5Backend}>
         {
           selectedClass ? (
-            <CardDisplay selected={selectedClass} />
+            <CardDisplay selected={selectedClass} filter={filterQueryString} />
           ) : (
             <ClassSelector onClick={handleSelect} />
           )
