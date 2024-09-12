@@ -26,7 +26,7 @@ function DeckBuilder() {
     <div className="deck-builder">
       <FilterSettings updateData={setQueryString}/>
       <DndProvider backend={HTML5Backend}>
-        <CardDisplay onSelect={handleSelect}/>
+        <CardDisplay onSelect={handleSelect} searchParams={queryString}/>
         <DeckInfo deck={cardsInDeck} />
         <div className="bottom-container">
           <Stash />
