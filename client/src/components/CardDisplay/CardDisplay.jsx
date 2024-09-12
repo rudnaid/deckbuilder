@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CardsContainer from '../CardsContainer/CardsContainer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from "react-intersection-observer"
 import ClassSelector from '../ClassSelector/ClassSelector';
 
-function CardDisplay() {
+function CardDisplay({selected}) {
 
-  const LIMIT = 20; 
+  const LIMIT = 20;   
   const fetchCards = async ({ pageParam = 1 }) => {
-    const response = await fetch(`/api/cards?page=${pageParam}&limit=${LIMIT}`);
+    const response = await fetch(`/api/cards?page=${pageParam}&limit=${LIMIT}${selected}`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -42,10 +42,11 @@ function CardDisplay() {
 
   const allCards=data.pages.flat();
   
+
+
   return (
     <>
       <div className="card-display">
-        <ClassSelector />
         <CardsContainer cards={allCards} refe={ref} isFetchingNextPage={isFetchingNextPage}/>
         
       </div>

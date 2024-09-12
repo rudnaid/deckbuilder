@@ -18,18 +18,23 @@ function DeckBuilder() {
   };
 
   function handleSelect(chosenClass) {
-    setSelectedClass(chosenClass);
+    setSelectedClass(`&classId=${chosenClass}`);
   }
 
   return (
     <div className="deck-builder">
       <FilterSettings />
       <DndProvider backend={HTML5Backend}>
-        <CardDisplay onSelect={handleSelect}/>
-        <DeckInfo deck={cardsInDeck} />
+        {
+          selectedClass ? (
+            <CardDisplay selected={selectedClass} />
+          ) : (
+            <ClassSelector onClick={handleSelect} />
+          )
+        }
+        <Deck onDrop={handleDrop} />
         <div className="bottom-container">
-          <Stash />
-          <Deck onDrop={handleDrop} />
+          <DeckInfo deck={cardsInDeck} />
         </div>
       </DndProvider>
     </div>
