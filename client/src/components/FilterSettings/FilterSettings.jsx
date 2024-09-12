@@ -5,7 +5,7 @@ import InputTemplate from "./InputTemplate";
 import ManaCost from "./ManaCost";
 import useFetchData from '../../hooks/useFetchData';
 
-function FilterSettings(updateData) {
+function FilterSettings({updateData}) {
   const [classId, setClassId] = useState(null);
   const [type, setType] = useState(null);
   const [rarity, setRarity] = useState(null);
@@ -34,7 +34,7 @@ function FilterSettings(updateData) {
     return result.length > 0 ? result.join("&") : "";
   };
 
-  const handleSubmit = async (e) => {
+  const handleChange = async (e) => {
     e.preventDefault();
     updateData(createQueryString());
   };
@@ -48,7 +48,7 @@ function FilterSettings(updateData) {
   return (
     <div className="filter-settings">
       FilterSettings
-      <form onSubmit={handleSubmit}>
+      <form onChange={handleChange}>
         <InputTemplate
           label="Class"
           filter="classes"

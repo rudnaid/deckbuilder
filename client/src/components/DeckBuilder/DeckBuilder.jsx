@@ -12,6 +12,7 @@ import './DeckBuilder.css';
 function DeckBuilder() {
   const [cardsInDeck, setCardsInDeck] = useState([]);
   const [selectedClass, setSelectedClass] = useState();
+  const [queryString, setQueryString] = useState();
 
   const handleDrop = (item) => {
     setCardsInDeck((prev) => [...prev, item.card]);
@@ -23,7 +24,7 @@ function DeckBuilder() {
 
   return (
     <div className="deck-builder">
-      <FilterSettings />
+      <FilterSettings updateData={setQueryString}/>
       <DndProvider backend={HTML5Backend}>
         <CardDisplay onSelect={handleSelect}/>
         <DeckInfo deck={cardsInDeck} />
