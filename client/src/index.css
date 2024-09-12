@@ -24,11 +24,6 @@ a:hover {
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  /* display: flex;
-  flex-direction: column; */
-  height: 100vh;
-  /* flex: 1; */
-  /* overflow: hidden; */
 }
 
 h1 {

@@ -6,8 +6,10 @@ function App() {
 
   return (
     <>
-    <Navbar />
-    <DeckBuilder/>
+      <div className='main-content'>
+        <Navbar />
+        <DeckBuilder />
+      </div>
     </>
   )
 }
