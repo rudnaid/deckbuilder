@@ -4,7 +4,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from "react-intersection-observer"
 import ClassSelector from '../ClassSelector/ClassSelector';
 
-function CardDisplay() {
+function CardDisplay({searchParams}) {
 
   const LIMIT = 20; 
   const fetchCards = async ({ pageParam = 1 }) => {
