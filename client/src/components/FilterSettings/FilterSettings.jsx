@@ -1,16 +1,15 @@
-import ClassSelector from '../ClassSelector/ClassSelector';
 import "./FilterSettings.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputTemplate from "./InputTemplate";
 import ManaCost from "./ManaCost";
-import useFetchData from '../../hooks/useFetchData';
+import useFetchData from "../../hooks/useFetchData";
 
 function FilterSettings(updateData) {
-  const [classId, setClassId] = useState(null);
-  const [type, setType] = useState(null);
-  const [rarity, setRarity] = useState(null);
-  const [manacost, setManaCost] = useState(null);
-  const { data: metaData, loading, error } = useFetchData('/api/meta');
+  const [classId, setClassId] = useState('all');
+  const [type, setType] = useState('all');
+  const [rarity, setRarity] = useState('all');
+  const [manacost, setManaCost] = useState('all');
+  const { data: metaData, loading, error } = useFetchData("/api/meta");
 
   function handleClick(e) {
     setManaCost(e.target.value);
@@ -34,21 +33,22 @@ function FilterSettings(updateData) {
     return result.length > 0 ? result.join("&") : "";
   };
 
-  const handleSubmit = async (e) => {
+  const handleChange = async (e) => {
     e.preventDefault();
+    console.log(createQueryString());
     updateData(createQueryString());
   };
   if (loading) {
-    return (<div>{loading}</div>)
+    return <div>{loading}</div>;
   }
   if (error) {
-    return (<div>{`Error occured: ${error}`}</div>)
+    return <div>{`Error occured: ${error}`}</div>;
   }
 
   return (
     <div className="filter-settings">
       FilterSettings
-      <form onSubmit={handleSubmit}>
+      <form onChange={handleChange}>
         <InputTemplate
           label="Class"
           filter="classes"
