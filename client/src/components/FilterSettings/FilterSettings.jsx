@@ -4,12 +4,12 @@ import InputTemplate from "./InputTemplate";
 import ManaCost from "./ManaCost";
 import useFetchData from "../../hooks/useFetchData";
 
-function FilterSettings(updateData) {
-  const [classId, setClassId] = useState('all');
-  const [type, setType] = useState('all');
-  const [rarity, setRarity] = useState('all');
-  const [manacost, setManaCost] = useState('all');
-  const { data: metaData, loading, error } = useFetchData("/api/meta");
+function FilterSettings({updateData}) {
+  const [classId, setClassId] = useState(null);
+  const [type, setType] = useState(null);
+  const [rarity, setRarity] = useState(null);
+  const [manacost, setManaCost] = useState(null);
+  const { data: metaData, loading, error } = useFetchData('/api/meta');
 
   function handleClick(e) {
     setManaCost(e.target.value);
@@ -34,6 +34,7 @@ function FilterSettings(updateData) {
   };
 
   const handleChange = async (e) => {
+  const handleChange = async (e) => {
     e.preventDefault();
     console.log(createQueryString());
     updateData(createQueryString());
@@ -48,6 +49,7 @@ function FilterSettings(updateData) {
   return (
     <div className="filter-settings">
       FilterSettings
+      <form onChange={handleChange}>
       <form onChange={handleChange}>
         <InputTemplate
           label="Class"
