@@ -32,7 +32,6 @@ function CardDisplay() {
     }
   }, [fetchNextPage, inView])
 
-  console.log(data)
   if (status === 'pending') {
     return <div>loading...</div>
   }
@@ -41,13 +40,11 @@ function CardDisplay() {
   }
 
   const allCards=data.pages.flat();
-  console.log('helo' + allCards);
   
   return (
     <>
       <div className="card-display">
-        <CardsContainer cards={allCards} />
-        <div ref={ref} style={{ height: '1px' }}>{isFetchingNextPage && 'loading'}</div>
+        <CardsContainer cards={allCards} refe={ref} isFetchingNextPage={isFetchingNextPage}/>
       </div>
     </>
   )
