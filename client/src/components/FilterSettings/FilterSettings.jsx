@@ -3,32 +3,18 @@ import "./FilterSettings.css";
 import { useEffect, useState } from "react";
 import InputTemplate from "./InputTemplate";
 import ManaCost from "./ManaCost";
+import useFetchData from '../../hooks/useFetchData';
 
 function FilterSettings(updateData) {
-  const [meta, setMeta] = useState([]);
   const [classId, setClassId] = useState(null);
   const [type, setType] = useState(null);
   const [rarity, setRarity] = useState(null);
   const [manacost, setManaCost] = useState(null);
-  const [loading, setLoading] = useState(true)
-  const [error, setError] =useState(false)
-  useEffect(() => {
-    const fetchMeta = async () => {
-    setLoading(true)
-      try {
-        const data = await fetch("/api/meta");
-        const result = await data.json();
-        console.log("success");
-        setMeta(result);
-      } catch (error) {
-        console.log(error);
-        setError(error)
-      } finally {
-        setLoading(false)
-      }
-    };
-    fetchMeta();
-  }, []);
+  const { data: metaData, loading, error } = useFetchData('/api/meta');
+
+  function handleClick(e) {
+    setManaCost(e.target.value);
+  }
 
   const createQueryString = () => {
     let result = [];
@@ -66,25 +52,25 @@ function FilterSettings(updateData) {
         <InputTemplate
           label="Class"
           filter="classes"
-          key="name"
-          data={meta}
+          objectKey="name"
+          data={metaData[0]}
           setState={setClassId}
         />
         <InputTemplate
           label="Type"
           filter="types"
-          key="name"
-          data={meta}
+          objectKey="name"
+          data={metaData[0]}
           setState={setType}
         />
         <InputTemplate
           label="Rarity"
           filter="rarities"
-          key="slug"
-          data={meta}
+          objectKey="slug"
+          data={metaData[0]}
           setState={setRarity}
         />
-        <ManaCost label="Mana Cost" setState={setManaCost}></ManaCost>
+        <ManaCost onClick={handleClick}></ManaCost>
       </form>
     </div>
   );

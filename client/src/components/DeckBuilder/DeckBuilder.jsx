@@ -23,7 +23,6 @@ function DeckBuilder() {
 
   return (
     <div className="deck-builder">
-      <ClassSelector  />
       <FilterSettings />
       <DndProvider backend={HTML5Backend}>
         <CardDisplay onSelect={handleSelect}/>

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import CardsContainer from '../CardsContainer/CardsContainer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from "react-intersection-observer"
+import ClassSelector from '../ClassSelector/ClassSelector';
 
 function CardDisplay() {
 
@@ -44,7 +45,9 @@ function CardDisplay() {
   return (
     <>
       <div className="card-display">
+        <ClassSelector />
         <CardsContainer cards={allCards} refe={ref} isFetchingNextPage={isFetchingNextPage}/>
+        
       </div>
     </>
   )

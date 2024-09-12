@@ -19,6 +19,7 @@ function Card({ card }) {
       className={"card"}
     >
       <img src={card.image}></img>
+    </div>
   );
 }
 

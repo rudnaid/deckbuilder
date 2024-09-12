@@ -1,8 +1,14 @@
-export default function ManaCost(label, setState) {
+export default function ManaCost({ handleClick }) {
+  const totalCost = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
   return (
-    <label>
-      {label}
-      <input type="text" value="0" onChange={(e) => setState(e.target.value)}>0</input>
-    </label>
+    <>
+      {totalCost.map((cost, idx) => (
+        <button
+          key={idx}
+          onClick={(e) => handleClick(e)}
+          value={cost}>{cost}</button>
+      ))}
+    </>
   );
 }

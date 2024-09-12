@@ -1,15 +1,15 @@
-export default function InputTemplate({label, filter, key, data, setState}) {
+export default function InputTemplate({label, filter, objectKey, data, setState}) {
     return (
       <label>
         {label}
-        <input type="select" onChange={(e) => setState(e.target.value)}>
+        <select type="select" onChange={(e) => setState(e.target.value)}>
           <option value="all">All</option>
           {data[filter].map((item, index) => (
             <option key={index} value={item.id}>
-              {item[key]}
+              {item[objectKey]}
             </option>
           ))}
-        </input>
+        </select>
       </label>
     );
   }
