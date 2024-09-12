@@ -1,7 +1,7 @@
 import Card from "../Card/Card"
 import './CardsContainer.css';
 
-function CardsContainer({ cards }) {
+function CardsContainer({ cards,refe, isFetchingNextPage}) {
   return (
     <div className="cards-container">
       {cards.map((card, index) => {
@@ -14,6 +14,7 @@ function CardsContainer({ cards }) {
           </>
         )
       })}
+    <div ref={refe} style={{ height: '1px' }}>{isFetchingNextPage && 'loading'}</div>
     </div>
   )
 }

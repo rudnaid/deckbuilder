@@ -18,8 +18,7 @@ function Card({ card }) {
       }}
       className={"card"}
     >
-      <img src={card.image}  ></img>
-    </div>
+      <img src={card.image}></img>
   );
 }
 
