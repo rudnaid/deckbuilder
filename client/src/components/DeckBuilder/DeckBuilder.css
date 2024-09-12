@@ -26,20 +26,21 @@
   grid-column: 3 / 4; 
 } */
 
-.deck-builder {
+.deck-builder{
   display: grid;
-  grid-template-columns: 200px 1fr 200px;
+  grid-template-columns: 1fr 5fr 1fr;
   grid-template-rows: 3fr 1fr;
-  max-width: 100vw;
-
+  margin-top: 2rem;
 }
 
-.bottom-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background-color: #eaeaea;
-  min-width: 100vw;
-  position: fixed;
-  bottom: 0;
+.bottom-container{
+ grid-column: span 3;
+ display: flex;
+ justify-content: space-between;
+
+}
+.bottom-container div{
+  min-width: 49%;
+  overflow-x: hidden;
 
 }

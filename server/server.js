@@ -7,6 +7,7 @@ import userRouter from "./routes/user.js";
 import filterRouter from "./routes/filter.js"
 const port = process.env.SERVER_PORT;
 const app = express();
+
 mongoose.connect(process.env.DATABASE_URL);
 app.use(cors());
 app.use(express.json());

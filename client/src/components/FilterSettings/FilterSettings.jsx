@@ -9,9 +9,11 @@ function FilterSettings(updateData) {
   const [type, setType] = useState(null);
   const [rarity, setRarity] = useState(null);
   const [manacost, setManaCost] = useState(null);
-
+  const [loading, setLoading] = useState(true)
+  const [error, setError] =useState(false)
   useEffect(() => {
     const fetchMeta = async () => {
+    setLoading(true)
       try {
         const data = await fetch("/api/meta");
         const result = await data.json();
@@ -19,10 +21,13 @@ function FilterSettings(updateData) {
         setMeta(result);
       } catch (error) {
         console.log(error);
+        setError(error)
+      } finally {
+        setLoading(false)
       }
     };
     fetchMeta();
-  }, [meta]);
+  }, []);
 
   const createQueryString = () => {
     let result = [];
@@ -46,6 +51,13 @@ function FilterSettings(updateData) {
     e.preventDefault();
     updateData(createQueryString());
   };
+  if (loading) {
+    return (<div>{loading}</div>)
+  }
+  if (error) {
+    return (<div>{`Error occured: ${error}`}</div>)
+  }
+
   return (
     <div className="filter-settings">
       FilterSettings
