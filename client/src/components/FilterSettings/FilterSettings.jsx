@@ -9,6 +9,7 @@ function FilterSettings({updateData}) {
   const [type, setType] = useState('all');
   const [rarity, setRarity] = useState('all');
   const [manacost, setManaCost] = useState('all');
+
   const { data: metaData, loading, error } = useFetchData('/api/meta');
 
   function handleClick(e) {
