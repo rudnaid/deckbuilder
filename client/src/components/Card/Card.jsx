@@ -15,13 +15,10 @@ function Card({ card }) {
       ref={drag}
       style={{
         opacity: isDragging ? 0.5 : 1
-
-        
       }}
       className={"card"}
     >
       <img src={card.image}></img>
-    </div>
   );
 }
 

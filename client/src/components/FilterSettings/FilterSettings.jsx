@@ -1,3 +1,4 @@
+import ClassSelector from '../ClassSelector/ClassSelector';
 import "./FilterSettings.css";
 import { useEffect, useState } from "react";
 import InputTemplate from "./InputTemplate";
