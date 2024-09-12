@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDrop } from "react-dnd";
+import CardCompact from '../CardCompact/CardCompact.jsx'
 import './Deck.css';
 
 
@@ -20,6 +21,7 @@ function Deck({ onDrop }) {
   }));
 
   return (
+    <div className="deck-container">
       <div className="deck"
         ref={drop}
         style={{
@@ -27,17 +29,14 @@ function Deck({ onDrop }) {
         }}
       >
         <h3>Deck</h3>
-        <ul>
-          {cardsInDeck.map((card) => (
-            <li
-              key={card.id}
-              style={{ color: 'black' }}
-            >
-              {card.name}
-            </li>
-          ))}
-        </ul>
+        <div className="current-deck-container">
+          {cardsInDeck.map((card, idx) => {
+            return <CardCompact key={idx} card={card} />
+          })}
+        </div>
       </div>
+      
+    </div>
   );
 };
 
