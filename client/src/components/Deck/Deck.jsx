@@ -25,11 +25,7 @@ function Deck({ onDrop }) {
       <div className="deck"
         ref={drop}
         style={{
-          height: '200px',
-          width: '100%',
-          border: '1px solid black',
           backgroundColor: isOver ? 'lightgreen' : 'white',
-          color: 'black'
         }}
       >
         <h3>Deck</h3>

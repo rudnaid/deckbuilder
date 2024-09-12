@@ -1,5 +1,5 @@
 import useFetchData from "../../hooks/useFetchData"
-
+import "./ClassSelector.css"
 function ClassSelector({ onClick }) {
 
   const { data: metaData, loading, error } = useFetchData('/api/meta');

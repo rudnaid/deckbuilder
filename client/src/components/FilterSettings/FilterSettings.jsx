@@ -1,56 +1,53 @@
 import "./FilterSettings.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputTemplate from "./InputTemplate";
 import ManaCost from "./ManaCost";
 import useFetchData from "../../hooks/useFetchData";
 
-function FilterSettings({updateData}) {
-  const [classId, setClassId] = useState('all');
-  const [type, setType] = useState('all');
-  const [rarity, setRarity] = useState('all');
-  const [manacost, setManaCost] = useState('all');
+function FilterSettings({ setFilter }) {
+  const [classId, setClassId] = useState();
+  const [type, setType] = useState();
+  const [rarity, setRarity] = useState();
+  const [manaCost, setManaCost] = useState();
 
-  const { data: metaData, loading, error } = useFetchData('/api/meta');
-
-  function handleClick(e) {
-    setManaCost(e.target.value);
-  }
+  const { data: metaData, loading, error } = useFetchData("/api/meta");
 
   const createQueryString = () => {
-    let result = ['&'];
-    if (classId !== "all") {
-      result.push(`classId=${classId}`);
+    const params = new URLSearchParams();
+    if (classId ) params.append("classId", classId);
+    if (type) params.append("type", type);
+    if (rarity) params.append("rarity", rarity);
+    if (manaCost) params.append("manaCost", manaCost);
+    if (params.has('classId') || params.has('type')|| params.has('rarity')|| params.has('manaCost')) {
+      return "&"+params.toString();
+    }else {
+      return ''
     }
-    if (type !== "all") {
-      result.push(`type=${type}`);
-    }
-    if (rarity !== "all") {
-      result.push(`rarity=${rarity}`);
-    }
-    if (manacost !== "all") {
-      result.push(`manaCost=${manacost}`);
-    }
-    
-    return result.length > 0 ? result.join("&") : "";
+
   };
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    updateData(createQueryString());
+  useEffect(() => {
+    // Update filter state outside the component whenever any filter changes
+    const queryString = createQueryString();
+    console.log("Updated Query String:", queryString);
+    setFilter(queryString);
+  }, [classId, type, rarity, manaCost, setFilter]); // Dependency array to track state changes
+
+  const handleClick = (e) => {
+    setManaCost(e.target.value);
   };
+
   if (loading) {
-    return <div>{loading}</div>;
+    return <div>Loading...</div>;
   }
   if (error) {
-    return <div>{`Error occured: ${error}`}</div>;
-  };
-  console.log(createQueryString());
-  
+    return <div>Error occurred: {error}</div>;
+  }
 
   return (
     <div className="filter-settings">
       FilterSettings
-      <form onChange={handleChange}>
+      <form>
         <InputTemplate
           label="Class"
           filter="classes"
@@ -72,10 +69,10 @@ function FilterSettings({updateData}) {
           data={metaData[0]}
           setState={setRarity}
         />
-        <ManaCost onClick={handleClick}></ManaCost>
+        <ManaCost onClick={handleClick} />
       </form>
     </div>
-  )
+  );
 }
 
 export default FilterSettings;
