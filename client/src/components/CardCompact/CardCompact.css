@@ -1,0 +1,8 @@
+img.cropped{
+    width: calc(100% + 15px); /* Extends width to accommodate cropped part */
+    height: 50px; /* Keeps the aspect ratio */
+    object-fit: cover; /* Ensures the image fills the container */
+    object-position: -30px 0; /* Moves the image 30px to the left */
+    overflow: hidden; /* Hides the overflowed part */
+    aspect-ratio: 5;
+}

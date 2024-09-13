@@ -1,5 +1,5 @@
 import { useDrag } from 'react-dnd';
-
+import "./CardCompact.css"
 function CardCompact({ card }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CARD',
@@ -13,7 +13,7 @@ function CardCompact({ card }) {
   return (
     <>
       <div className="card-small-container" ref={drag}>
-        <img src={card.cropImage} alt="cropped-card-image"></img>
+        <img className='cropped' src={card.cropImage} alt="cropped-card-image"></img>
       </div>
     </>
   )

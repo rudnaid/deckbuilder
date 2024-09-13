@@ -21,12 +21,9 @@ function Deck({ onDrop }) {
   }));
 
   return (
-    <div className="deck-container">
+    <div className="deck-container" ref={drop}
+>
       <div className="deck"
-        ref={drop}
-        style={{
-          backgroundColor: isOver ? 'lightgreen' : 'white',
-        }}
       >
         <h3>Deck</h3>
         <div className="current-deck-container">
@@ -35,7 +32,7 @@ function Deck({ onDrop }) {
           })}
         </div>
       </div>
-      
+
     </div>
   );
 };
