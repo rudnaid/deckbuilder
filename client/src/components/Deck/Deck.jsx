@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDrop } from "react-dnd";
 import CardCompact from '../CardCompact/CardCompact.jsx'
 import './Deck.css';
+import Trashcan from "../Trashcan.jsx";
 
 
 function Deck({ onDrop }) {
@@ -20,6 +21,10 @@ function Deck({ onDrop }) {
     }),
   }));
 
+  function handleTrashCanDrop(cardToDelete) {
+    setCardsInDeck((prevCards) => prevCards.filter(card => card._id !== cardToDelete._id));
+  }
+
   return (
     <div className="deck-container">
       <div className="deck"
@@ -30,12 +35,12 @@ function Deck({ onDrop }) {
       >
         <h3>Deck</h3>
         <div className="current-deck-container">
-          {cardsInDeck.map((card, idx) => {
-            return <CardCompact key={idx} card={card} />
-          })}
+          {cardsInDeck && cardsInDeck.map((card, idx) => (
+            <CardCompact key={idx} card={card} />
+          ))}
         </div>
       </div>
-      
+      <Trashcan onDelete={handleTrashCanDrop} />
     </div>
   );
 };

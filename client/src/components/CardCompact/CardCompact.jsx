@@ -2,13 +2,12 @@ import { useDrag } from 'react-dnd';
 
 function CardCompact({ card }) {
   const [{ isDragging }, drag] = useDrag(() => ({
-    type: 'CARD',
+    type: 'CARD-COMPACT',
     item: { card },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
   }));
-  console.log(card);
   
   return (
     <>
