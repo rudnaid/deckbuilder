@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './DeckInfo.css';
 
 function DeckInfo({ deck }) {
   const [currentDeck, setCurrentDeck] = useState(deck);
+
+  useEffect(() => {
+    setCurrentDeck(deck);
+  }, [deck]);
 
   return (
     <div className="deckinfo">
