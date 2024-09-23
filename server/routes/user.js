@@ -1,6 +1,7 @@
 import { Router } from "express";
 import User from "../model/User.js";
 
+
 const userRouter = Router();
 
 userRouter.post("/validatelogin", async (req, res) => {
