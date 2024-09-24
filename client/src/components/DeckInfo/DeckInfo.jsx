@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './DeckInfo.css';
 
 function DeckInfo({ deck }) {
   const [currentDeck, setCurrentDeck] = useState(deck);
+
+  useEffect(() => {
+    setCurrentDeck(deck);
+  }, [deck]);
 
   return (
     <div className="deckinfo">
@@ -11,7 +15,7 @@ function DeckInfo({ deck }) {
           <div key={card.id}>{card.name}</div>
         ))
       ) : (
-        <div>DECKINFO PLACEHOLDER</div>
+        <div>No cards in deck yet</div>
       )}
     </div>
   );

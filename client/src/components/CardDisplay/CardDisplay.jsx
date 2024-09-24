@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import CardsContainer from '../CardsContainer/CardsContainer';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { useInView } from "react-intersection-observer"
 
 function CardDisplay({selected, filter}) {
-
+  const queryClient = useQueryClient()
   const LIMIT = 20;   
   const fetchCards = async ({ pageParam = 1 }) => {
     const response = await fetch(`/api/cards?page=${pageParam}&limit=${LIMIT}${selected}${filter}`);
@@ -16,15 +16,19 @@ function CardDisplay({selected, filter}) {
   };
   
   const { data, error, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['cards'],
+    queryKey: ['cards',filter],
     queryFn: fetchCards,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length === LIMIT ? allPages.length + 1 : undefined;
     },
   })
+  useEffect(()=>{
+    queryClient.invalidateQueries(['cards',filter])    
+      },[filter,queryClient])
 
   const { ref, inView } = useInView()
+
 
   useEffect(() => {
     if (inView) {
