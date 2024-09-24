@@ -11,16 +11,20 @@ export function Login(isLogin) {
     e.preventDefault();
 
     try {
-      const data = await fetch("/api/user/validatelogin", {
+      const response = await fetch("/api/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `${localStorage.getItem('token')}`
         },
         body: JSON.stringify({ username: username, password: password }),
       });
-      const result = await data.json();
-      if (data.status === 200) {
+      const result = await response.json();
+
+      if (response.status === 200) {
+        localStorage.setItem("token", result.token);
         setIsValid(true);
+        isLogin(true);
       }
     } catch (error) {
       console.error(error);
@@ -29,10 +33,6 @@ export function Login(isLogin) {
 
   if (isRegister) {
     return <Register />;
-  }
-
-  if (isValid) {
-    isLogin(true);
   }
 
   return (
@@ -48,13 +48,15 @@ export function Login(isLogin) {
         <label>
           Password:
           <input
-            type="text"
+            type="password"
             onChange={(event) => setPassword(event.target.value)}
           ></input>
         </label>
         <button type="submit">Login</button>
       </form>
-      <button key="toRegister" onClick={() => setRegister(true)}>Register</button>
+      <button key="toRegister" onClick={() => setRegister(true)}>
+        Register
+      </button>
     </Fragment>
   );
 }
