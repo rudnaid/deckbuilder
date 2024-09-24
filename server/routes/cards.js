@@ -7,12 +7,20 @@ cardsRouter.get('/', async (req, res) => {
     try {
         const limit = parseInt(req.query.limit)
         const page = parseInt(req.query.page)
-        const classId = parseInt(req.query.classId) || { $exists: true }
-        const manaCost = parseInt(req.query.manaCost) || { $exists: true }
-        const rarityId = parseInt(req.query.rarity) || { $exists: true }
-        const cardTypeId = parseInt(req.query.type) || { $exists: true }
+        const handleQueryParam = (param) => {
+            if (!param) {
+                return { $exists: true };
+            }
+            const values = param.split(',').map(Number);
+            return values.length > 1 ? { $in: values } : values[0];  
+        };
+
+        const classId = handleQueryParam(req.query.classId);
+        const manaCost = handleQueryParam(req.query.manaCost);
+        const rarityId = handleQueryParam(req.query.rarity);
+        const cardTypeId = handleQueryParam(req.query.type);
         const startIndex = (page - 1) * limit
-        const cards = await Card.find({ manaCost, classId, rarityId, cardTypeId }).skip(startIndex).limit(limit).sort({manaCost:1})
+        const cards = await Card.find({ manaCost, classId, rarityId, cardTypeId }).skip(startIndex).limit(limit).sort({ manaCost: 1 })
         res.status(200).json(cards)
     } catch (error) {
         res.status(404).json({ error: 'File not found' })

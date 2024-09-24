@@ -1,13 +1,13 @@
-export default function ManaCost({ handleClick }) {
+export default function ManaCost({ onClick }) {
   const totalCost = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <>
       {totalCost.map((cost, idx) => (
-        <button
+        <input type="button"
           key={idx}
-          onClick={(e) => handleClick(e)}
-          value={cost}>{cost}</button>
+          onClick={(e) => onClick('manaCost', e.target.value)}
+          value={cost}/>
       ))}
     </>
   );

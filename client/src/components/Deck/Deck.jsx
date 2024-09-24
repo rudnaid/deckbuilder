@@ -4,6 +4,19 @@ import CardCompact from '../CardCompact/CardCompact.jsx'
 import './Deck.css';
 import Trashcan from "../Trashcan.jsx";
 
+const saveDeck = (deck) => {
+  const deckToSave = deck.map((card) => {
+    return { cardId: card._id, count: card.count }
+  });
+  return fetch('/api/deck/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${localStorage.getItem('token')}`
+    },
+    body: JSON.stringify(deckToSave)
+  }).then((res) => res.json())
+}
 
 function Deck({ onDrop }) {
   const [cardsInDeck, setCardsInDeck] = useState([]);
@@ -15,7 +28,7 @@ function Deck({ onDrop }) {
 
       setCardsInDeck((prevCards) => {
         const cardIndex = prevCards.findIndex(card => card._id === item.card._id);
-    
+
         if (cardIndex !== -1) {
           if (prevCards[cardIndex].count === 2) {
             return prevCards;
@@ -37,15 +50,20 @@ function Deck({ onDrop }) {
     }),
   }));
 
-  // console.log(cardsInDeck);
-  
+  const onSave = async (deck) => {
+    saveDeck(deck).then((res) => {
+      setCardsInDeck([])
+    })
+      .catch((error) => console.log(error))
+  }
+
   function handleTrashCanDrop(cardToDelete) {
     setCardsInDeck((prevCards) => prevCards.filter(card => card._id !== cardToDelete._id));
   }
 
   return (
     <div className="deck-container" ref={drop}
->
+    >
       <div className="deck"
 
         ref={drop}
@@ -58,11 +76,13 @@ function Deck({ onDrop }) {
 
           {cardsInDeck && cardsInDeck.map((card, idx) => {
 
-            return <CardCompact key={idx} card={card} count={card.count} />
+            return <CardCompact key={card._id} card={card} count={card.count} />
           })}
         </div>
       </div>
       <Trashcan onDelete={handleTrashCanDrop} />
+      <button onClick={() => { onSave(cardsInDeck) }}>Save deck</button>
+
     </div>
   );
 };

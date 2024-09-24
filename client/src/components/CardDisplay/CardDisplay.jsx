@@ -3,29 +3,30 @@ import CardsContainer from '../CardsContainer/CardsContainer';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { useInView } from "react-intersection-observer"
 
-function CardDisplay({selected, filter}) {
+function CardDisplay({ selected, filter }) {
   const queryClient = useQueryClient()
-  const LIMIT = 20;   
+  const LIMIT = 20;
   const fetchCards = async ({ pageParam = 1 }) => {
-    const response = await fetch(`/api/cards?page=${pageParam}&limit=${LIMIT}${selected}${filter}`);
+    const response = await fetch(`/api/cards?page=${pageParam}&limit=${LIMIT}${selected}&${filter}`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const newCards = await response.json();
     return newCards;
   };
-  
+
   const { data, error, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['cards',filter],
+    queryKey: ['cards', filter],
     queryFn: fetchCards,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length === LIMIT ? allPages.length + 1 : undefined;
     },
   })
-  useEffect(()=>{
-    queryClient.invalidateQueries(['cards',filter])    
-      },[filter,queryClient])
+
+  useEffect(() => {
+    queryClient.invalidateQueries(['cards', filter])
+  }, [filter, queryClient])
 
   const { ref, inView } = useInView()
 
@@ -43,15 +44,15 @@ function CardDisplay({selected, filter}) {
     return <div>{error.message}</div>
   }
 
-  const allCards=data.pages.flat();
-  
+  const allCards = data.pages.flat();
+
 
 
   return (
     <>
       <div className="card-display">
-        <CardsContainer cards={allCards} refe={ref} isFetchingNextPage={isFetchingNextPage}/>
-        
+        <CardsContainer cards={allCards} refe={ref} isFetchingNextPage={isFetchingNextPage} />
+
       </div>
     </>
   )

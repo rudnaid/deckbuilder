@@ -1,40 +1,22 @@
 import "./FilterSettings.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import InputTemplate from "./InputTemplate";
 import ManaCost from "./ManaCost";
 import useFetchData from "../../hooks/useFetchData";
 
 function FilterSettings({ setFilter }) {
-  const [classId, setClassId] = useState();
-  const [type, setType] = useState();
-  const [rarity, setRarity] = useState();
-  const [manaCost, setManaCost] = useState();
-
+  const filterOptions = useRef()
   const { data: metaData, loading, error } = useFetchData("/api/meta");
 
-  const createQueryString = () => {
-    const params = new URLSearchParams();
-    if (classId ) params.append("classId", classId);
-    if (type) params.append("type", type);
-    if (rarity) params.append("rarity", rarity);
-    if (manaCost) params.append("manaCost", manaCost);
-    if (params.has('classId') || params.has('type')|| params.has('rarity')|| params.has('manaCost')) {
-      return "&"+params.toString();
-    }else {
-      return ''
-    }
+  const createQueryString = (filters) => {
+    const queryString = new URLSearchParams(filters);
+    console.log(queryString.toString())
+    setFilter(queryString.toString())
   };
-
-  useEffect(() => {
-    // Update filter state outside the component whenever any filter changes
-    const queryString = createQueryString();
-    console.log("Updated Query String:", queryString);
-    setFilter(queryString);
-  }, [classId, type, rarity, manaCost, setFilter]); // Dependency array to track state changes
-
-  const handleClick = (e) => {
-    setManaCost(e.target.value);
-  };
+  const handleFilter = (type, value) =>{
+    filterOptions.current = {...filterOptions.current, [type]:value}
+    createQueryString(filterOptions.current)
+  }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -47,28 +29,25 @@ function FilterSettings({ setFilter }) {
     <div className="filter-settings">
       FilterSettings
       <form>
-        <InputTemplate
-          label="Class"
-          filter="classes"
-          objectKey="name"
-          data={metaData[0]}
-          setState={setClassId}
-        />
+
         <InputTemplate
           label="Type"
           filter="types"
           objectKey="name"
+          type="type"
           data={metaData[0]}
-          setState={setType}
+          onChange={handleFilter}
+
         />
         <InputTemplate
           label="Rarity"
           filter="rarities"
           objectKey="slug"
+          type="rarity"
           data={metaData[0]}
-          setState={setRarity}
+          onChange={handleFilter}
         />
-        <ManaCost onClick={handleClick} />
+        <ManaCost onClick={handleFilter} />
       </form>
     </div>
   );

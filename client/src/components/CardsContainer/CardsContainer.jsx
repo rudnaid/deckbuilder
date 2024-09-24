@@ -4,12 +4,12 @@ import './CardsContainer.css';
 function CardsContainer({ cards,refe, isFetchingNextPage}) {
   return (
     <div className="cards-container">
-      {cards.map((card, index) => {
+      {cards.map((card) => {
         return (
           <>
             <Card
               card={card}
-              key={index}
+              key={card._id}
             />
           </>
         )
