@@ -2,7 +2,7 @@ export function calculateTotalManaCost(deck) {
 	let totalManaCost = 0;
 
 	deck.forEach((card) => {
-		totalManaCost += card.manaCost * card.count;
+		totalManaCost += card.manaCost;
 	});
 
 	return totalManaCost;
