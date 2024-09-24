@@ -12,8 +12,24 @@ function Deck({ onDrop }) {
     accept: 'CARD',
     drop: (item) => {
       onDrop(item);
-      setCardsInDeck((prevCards) => [...prevCards, item.card])
 
+      setCardsInDeck((prevCards) => {
+        const cardIndex = prevCards.findIndex(card => card._id === item.card._id);
+    
+        if (cardIndex !== -1) {
+          if (prevCards[cardIndex].count === 2) {
+            return prevCards;
+          }
+
+          return prevCards.map((card, index) =>
+            index === cardIndex
+              ? { ...card, count: card.count ? card.count + 1 : 2 }
+              : card
+          );
+        } else {
+          return [...prevCards, { ...item.card, count: 1 }];
+        }
+      });
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -21,6 +37,8 @@ function Deck({ onDrop }) {
     }),
   }));
 
+  // console.log(cardsInDeck);
+  
   function handleTrashCanDrop(cardToDelete) {
     setCardsInDeck((prevCards) => prevCards.filter(card => card._id !== cardToDelete._id));
   }
@@ -37,11 +55,8 @@ function Deck({ onDrop }) {
         <div className="current-deck">
 
           {cardsInDeck && cardsInDeck.map((card, idx) => {
-            let count = 0;
-            if (cardsInDeck.includes(card)) {
-              count = 1;
-            }
-            return <CardCompact key={idx} card={card} count={count} />
+
+            return <CardCompact key={idx} card={card} count={card.count} />
           })}
 
         </div>
