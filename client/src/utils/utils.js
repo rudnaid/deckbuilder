@@ -15,11 +15,11 @@ export function collectRarityData(deck) {
       {
         data: [0, 0, 0, 0, 0],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(154, 162, 235, 0.2)',
-          'rgba(134, 162, 235, 0.2)',
-          'rgba(55, 162, 235, 0.2)',
-          'rgba(59, 162, 235, 0.2)',
+          'rgba(255, 255, 255, 0.9)',
+          'rgba(120, 251, 76, 0.9)',
+          'rgba(47, 110, 214, 0.9)',
+          'rgba(151, 61, 229, 0.9)',
+          'rgba(239, 135, 51, 0.9)',
         ],
         borderWidth: 1,
       },
@@ -35,7 +35,6 @@ export function calculateCraftingCost(deck) {
   let craftingCost = 0;
 
   deck.forEach((card) => {
-    // placeholders for now
     craftingCost += card.rarityData.rarityData.craftingCost[0];
   });
   return craftingCost;

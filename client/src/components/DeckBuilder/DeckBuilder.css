@@ -6,12 +6,10 @@
 
 .bottom-container{
  grid-column: span 3;
- display: flex;
- justify-content: space-between;
+
 
 }
 .bottom-container div{
-  min-width: 49%;
   overflow-x: hidden;
 
 }
