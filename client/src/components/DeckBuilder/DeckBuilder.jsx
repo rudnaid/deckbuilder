@@ -20,9 +20,7 @@ function DeckBuilder() {
   function handleSelect(chosenClass) {
     setSelectedClass(`&classId=${chosenClass}`);
   }
-  if (filterQueryString){
 
-  }
 
   return (
     <div className="deck-builder">

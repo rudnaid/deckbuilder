@@ -10,6 +10,7 @@ import DeckBuilder from "./components/DeckBuilder/DeckBuilder.jsx";
 import CardDisplay from "./components/CardDisplay/CardDisplay.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Login } from "./components/Login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
     element: <CardDisplay />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: "/login",
+    element: <Login></Login>
+  }
 ]);
 
 const queryClient = new QueryClient()

@@ -44,8 +44,10 @@ function Deck({ onDrop }) {
   }
 
   return (
-    <div className="deck-container">
+    <div className="deck-container" ref={drop}
+>
       <div className="deck"
+
         ref={drop}
         style={{
           backgroundColor: isOver ? 'lightgreen' : 'white',
@@ -58,7 +60,6 @@ function Deck({ onDrop }) {
 
             return <CardCompact key={idx} card={card} count={card.count} />
           })}
-
         </div>
       </div>
       <Trashcan onDelete={handleTrashCanDrop} />

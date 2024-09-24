@@ -23,7 +23,6 @@ function FilterSettings({ setFilter }) {
     }else {
       return ''
     }
-
   };
 
   useEffect(() => {
