@@ -15,7 +15,7 @@ function CardDisplay({selected, filter}) {
     return newCards;
   };
   
-  const { data, error, status, fetchNextPage, isFetchingNextPage, refetch } = useInfiniteQuery({
+  const { data, error, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['cards',filter],
     queryFn: fetchCards,
     initialPageParam: 1,
