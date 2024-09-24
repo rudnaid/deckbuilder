@@ -3,7 +3,12 @@ const { Schema, model } = mongoose;
 
 const deckSchema = new Schema({
   name: { type: String, reqiured: true },
-  cards: Array,
+  cards: [
+    {
+      cardId: Schema.Types.ObjectId,
+      count: Number,
+    },
+  ],
 });
 
 export default model("Deck", deckSchema);
