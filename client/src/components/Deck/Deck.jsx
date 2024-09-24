@@ -74,8 +74,7 @@ function Deck({ onDrop }) {
         <h3>Deck</h3>
         <div className="current-deck">
 
-          {cardsInDeck && cardsInDeck.map((card, idx) => {
-
+          {cardsInDeck && cardsInDeck.map((card) => {
             return <CardCompact key={card._id} card={card} count={card.count} />
           })}
         </div>
