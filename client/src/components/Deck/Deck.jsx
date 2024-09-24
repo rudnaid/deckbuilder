@@ -31,13 +31,19 @@ function Deck({ onDrop }) {
         ref={drop}
         style={{
           backgroundColor: isOver ? 'lightgreen' : 'white',
-        }}
-      >
+        }}>
+
         <h3>Deck</h3>
-        <div className="current-deck-container">
-          {cardsInDeck && cardsInDeck.map((card, idx) => (
-            <CardCompact key={idx} card={card} />
-          ))}
+        <div className="current-deck">
+
+          {cardsInDeck && cardsInDeck.map((card, idx) => {
+            let count = 0;
+            if (cardsInDeck.includes(card)) {
+              count = 1;
+            }
+            return <CardCompact key={idx} card={card} count={count} />
+          })}
+
         </div>
       </div>
       <Trashcan onDelete={handleTrashCanDrop} />

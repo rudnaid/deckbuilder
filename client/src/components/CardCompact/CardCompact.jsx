@@ -1,6 +1,7 @@
 import { useDrag } from 'react-dnd';
+import './CardCompact.css';
 
-function CardCompact({ card }) {
+function CardCompact({ card, count }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CARD-COMPACT',
     item: { card },
@@ -8,14 +9,22 @@ function CardCompact({ card }) {
       isDragging: !!monitor.isDragging(),
     }),
   }));
-  
+
   return (
-    <>
-      <div className="card-small-container" ref={drag}>
-        <img src={card.cropImage} alt="cropped-card-image"></img>
+    <div className="cardCompact" ref={drag}>
+      <div className="manaCrystalWrapper">
+        <img src="/mana-crystal.png" alt="mana crystal" />
+        <div className="manaCost">{card.manaCost}</div>
       </div>
-    </>
-  )
+
+      <div className="cardImageWrapper">
+        <img src={card.cropImage} alt="cropped-card-image" />
+        <div className="cardName">{card.name}</div>
+      </div>
+
+      <div className="count">{count}</div>
+    </div>
+  );
 }
 
 export default CardCompact;

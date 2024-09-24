@@ -15,7 +15,7 @@ function DeckInfo({ deck }) {
           <div key={card.id}>{card.name}</div>
         ))
       ) : (
-        <div>DECKINFO PLACEHOLDER</div>
+        <div>No cards in deck yet</div>
       )}
     </div>
   );
