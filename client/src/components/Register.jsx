@@ -1,27 +1,32 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isCancel, setCancel] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await fetch("/api/user/register", {
+      const response = await fetch("/api/user/register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: username, password: password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
       });
-      console.log("success");
+      const result = await response.json();
+
+      if (response.status === 200) {
+        localStorage.setItem("token", result.token);
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <Fragment>
+    <>
       <form key="register" onSubmit={handleSubmit}>
         <label>
           Username:
@@ -29,11 +34,10 @@ export default function Register() {
         </label>
         <label>
           Password:
-          <input type="text" onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" onChange={(e) => setPassword(e.target.value)} />
         </label>
         <button type="submit">Register</button>
       </form>
-      <button>Cancel</button>
-    </Fragment>
+    </>
   );
 }
