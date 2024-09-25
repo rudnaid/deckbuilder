@@ -18,7 +18,7 @@ function DeckBuilder() {
   };
 
   function handleSelect(chosenClass) {
-    setSelectedClass(`&classId=${chosenClass}`);
+    setSelectedClass(`&classId=${chosenClass},12`);
   }
 
 

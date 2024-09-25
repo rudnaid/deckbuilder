@@ -14,7 +14,7 @@ function ClassSelector({ onClick }) {
         {metaData[0].classes.map((classItem, idx) => (
           <button
             key={idx}
-            onClick={() => onClick(idx)}
+            onClick={() => onClick(classItem.id)}
           >
             {classItem.name}
           </button>

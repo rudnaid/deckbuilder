@@ -4,13 +4,13 @@ export default function ManaCost({ onClick }) {
   return (
     <div className="manaCostWrapper" >
       {totalCost.map((cost, idx) => (
-        <div 
+        <div className="manacost"
           key={idx} 
           
           onClick={() => onClick('manaCost', cost)}
         >
           <img src={'./mana-crystal.png'} alt={`Mana cost ${cost}`} className="manaCrystal"/>
-          <div className="manaCost">{cost}</div>
+          <div >{cost}</div>
         </div>
       ))}
     </div>
