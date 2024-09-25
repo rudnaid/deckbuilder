@@ -1,8 +1,42 @@
 .filter-settings {
   grid-column: span 3;
   display: flex;
-  justify-content: left;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
   background-color: burlywood;
-  overflow: auto;
-  padding: 2rem;
+  overflow-x: auto;
+  padding: 1rem;
+  margin-top: 50px;
+  max-height: fit-content;
+}
+
+.manaCostWrapper {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+  margin-right: 10px;/
+}
+
+.manaCostWrapper:hover {
+  cursor: pointer;
+}
+
+.manaCost {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+
+.filter-settings form {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: fit-content;
 }

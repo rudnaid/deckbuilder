@@ -1,17 +1,4 @@
-.deck-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-	max-height: 80%;
-	border: '1px solid black';
-	color: 'black';
-  background-color: burlywood;
-  width: fit-content;
-  padding: 1rem;
-}
-
 .deck {
-  /* height: 80%; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,7 +9,7 @@
   height: 60%;
   background-color: burlywood;
   width: 20%;
-  border-radius: 2rem;
+  /* border-radius: 2rem; */
 }
 
 .deck-bottom { 
@@ -30,12 +17,13 @@
   margin-top: auto;
   background-color: burlywood;
   text-align: center;
-  padding: 10px;
+  /* padding: 10px; */
   position: relative;
-  display: flex;
+  /* justify-content: center; */
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  /* gap: 1rem; */
+  /* padding: 1rem; */
+  width: 100%;
 }
 
 .current-deck {

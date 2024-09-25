@@ -6,11 +6,11 @@
 }
 
 .manaCrystalWrapper {
-  position: absolute; /* Use absolute positioning for precise placement */
-  left: -16px; /* Move the mana crystal to the left to overlap the image */
+  position: absolute;
+  left: -16px;
   width: 40px;
   height: 40px;
-  z-index: 1; /* Ensure it stays on top of the card image */
+  z-index: 1;
 }
 
 .manaCrystalWrapper img {
@@ -22,14 +22,14 @@
   position: relative;
   width: 180px;
   height: 40px;
-  margin-left: 5px; /* Offset the card image so the overlap works correctly */
-  overflow: hidden; /* Crop overflow */
+  margin-left: 5px;
+  overflow: hidden;
 }
 
 .cardImageWrapper img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the image fits inside without distortion */
+  object-fit: cover;
 }
 
 .manaCost {
@@ -55,7 +55,7 @@
 }
 
 .count {
-  margin-left: 10px; /* Add some space from the card image */
+  margin-left: 10px;
   font-size: 1.1em;
   color: black;
 }

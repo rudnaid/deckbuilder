@@ -13,21 +13,25 @@ export function collectRarityData(deck) {
     labels: ["Free", "Common", "Rare", "Epic", "Legendary"],
     datasets: [
       {
+        label: 'Card Rarity Distribution', // Title for the dataset
         data: [0, 0, 0, 0, 0],
         backgroundColor: [
-          'rgba(255, 255, 255, 0.9)',
-          'rgba(120, 251, 76, 0.9)',
-          'rgba(47, 110, 214, 0.9)',
-          'rgba(151, 61, 229, 0.9)',
-          'rgba(239, 135, 51, 0.9)',
+          'rgba(255, 255, 255, 0.9)',  // Free
+          'rgba(120, 251, 76, 0.9)',   // Common
+          'rgba(47, 110, 214, 0.9)',   // Rare
+          'rgba(151, 61, 229, 0.9)',   // Epic
+          'rgba(239, 135, 51, 0.9)',   // Legendary
         ],
-        borderWidth: 1,
+        borderWidth: 0,
       },
     ],
   };
+
+  // Count the number of cards for each rarity
   deck.forEach((card) => {
-    rarityData.datasets[0].data[card.rarityId -1]++;
-  })
+    rarityData.datasets[0].data[card.rarityId - 1]++;
+  });
+
   return rarityData;
 }
 

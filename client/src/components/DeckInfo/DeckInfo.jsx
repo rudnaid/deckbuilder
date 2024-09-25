@@ -1,41 +1,96 @@
 import { useEffect, useState } from 'react';
-import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { calculateTotalManaCost, calculateCraftingCost, collectRarityData } from '../../utils/utils';
 import './DeckInfo.css';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,);
+
+const saveDeck = (deck) => {
+  const deckToSave = deck.map((card) => {
+    return { cardId: card._id, count: card.count };
+  });
+  return fetch("/api/deck/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(deckToSave),
+  }).then((res) => res.json());
+};
 
 function DeckInfo({ deck }) {
-  const [currentDeck, setCurrentDeck] = useState(deck);
+  const [cardsInDeck, setCardsInDeck] = useState(deck);
   const [totalManaCost, setTotalManaCost] = useState(0);
   const [craftingCost, setCraftingCost] = useState(0);
   const [rarityDistribution, setRarityDistribution] = useState(null);
 
   useEffect(() => {
-    setCurrentDeck(deck);
+    setCardsInDeck(deck);
     setTotalManaCost(() => calculateTotalManaCost(deck));
     setCraftingCost(() => calculateCraftingCost(deck));
     setRarityDistribution(() => collectRarityData(deck));
 
   }, [deck]);
 
+  const onSave = async (deck) => {
+    saveDeck(deck)
+      .then((res) => {
+        setCardsInDeck([]);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="deckinfo">
-      {currentDeck.length !== 0 ? (
+      {cardsInDeck.length !== 0 ? (
         <>
-          <div className='total-mana-wrapper'>Total Mana Cost
+          <div className='total-mana-wrapper'>
+            Total Mana Cost
             <div>{totalManaCost}</div>
           </div>
-          <div className='crafting-cost-wrapper'>Crafting Cost
+          <div className='crafting-cost-wrapper'>
+            Crafting Cost
             <div>{craftingCost}</div>
           </div>
           <div className='rarity-pie'>
-            <Pie data={rarityDistribution} />
+          <Bar
+        data={rarityDistribution}
+        options={{
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              grid: {
+                display: false,
+              },
+            },
+            y: {
+              grid: {
+                display: false,
+              },
+              ticks: {
+                display: false,
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+        }}/>
           </div>
+          <button
+            onClick={() => {
+              onSave(cardsInDeck);
+            }}>
+            Save deck
+          </button>
         </>
       ) : (
-        <div>No cards in deck yet</div>
+        <div>Drag some cards to the Deck</div>
       )}
     </div>
   );
