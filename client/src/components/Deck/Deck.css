@@ -6,36 +6,41 @@
 	border: '1px solid black';
 	color: 'black';
   background-color: burlywood;
-  position: relative;
-  overflow: hidden;
+  width: fit-content;
+  padding: 1rem;
 }
 
 .deck {
   /* height: 80%; */
   display: flex;
-  flex: 1;
   flex-direction: column;
-  flex-wrap: wrap;
   align-items: center;
   position: fixed;
-  width: 300px;
-  top: 80px;
-  right: 0;
-  margin-bottom: 60px;
+  max-width: 20%;
+  right: 2%;
+  top: 20%;
+  height: 60%;
   background-color: burlywood;
   overflow: auto;
-  padding-bottom: 80px;
+  width: 20%;
+  border-radius: 2rem;
 }
 
 .deck-bottom { 
   height: fit-content;
-  flex: 1;
+  margin-top: auto;
   background-color: burlywood;
   text-align: center;
   padding: 10px;
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .current-deck {
-  max-height: 500px;
+  overflow-y: scroll;
+  padding: 1rem 2rem
 }
+
