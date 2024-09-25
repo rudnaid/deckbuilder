@@ -4,19 +4,19 @@ import CardCompact from "../CardCompact/CardCompact.jsx";
 import "./Deck.css";
 import Trashcan from "../Trashcan.jsx";
 
-const saveDeck = (deck) => {
-  const deckToSave = deck.map((card) => {
-    return { cardId: card._id, count: card.count };
-  });
-  return fetch("/api/deck/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `${localStorage.getItem("token")}`,
-    },
-    body: JSON.stringify(deckToSave),
-  }).then((res) => res.json());
-};
+// const saveDeck = (deck) => {
+//   const deckToSave = deck.map((card) => {
+//     return { cardId: card._id, count: card.count };
+//   });
+//   return fetch("/api/deck/", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `${localStorage.getItem("token")}`,
+//     },
+//     body: JSON.stringify(deckToSave),
+//   }).then((res) => res.json());
+// };
 
 function Deck({ onDrop }) {
   const [cardsInDeck, setCardsInDeck] = useState([]);
@@ -91,13 +91,13 @@ function Deck({ onDrop }) {
         </div>
         <div className="deck-bottom">
           <Trashcan onDelete={handleTrashCanDrop} />
-          <button
+          {/* <button
             onClick={() => {
               onSave(cardsInDeck);
             }}
           >
             Save deck
-          </button>
+          </button> */}
         </div>
       </div>
     </>
