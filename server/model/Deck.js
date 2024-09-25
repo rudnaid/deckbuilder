@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
 const deckSchema = new Schema({
-  name: { type: String, reqiured: true },
+  name: { type: String, required: true },
   cards: [
     {
       cardId: Schema.Types.ObjectId,

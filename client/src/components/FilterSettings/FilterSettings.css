@@ -1,6 +1,8 @@
 .filter-settings {
   grid-column: span 3;
-  background-color: #f4f4f4;
+  display: flex;
+  justify-content: left;
+  background-color: burlywood;
   overflow: auto;
   padding: 2rem;
 }

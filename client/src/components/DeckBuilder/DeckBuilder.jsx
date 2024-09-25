@@ -12,7 +12,7 @@ function DeckBuilder() {
   const [cardsInDeck, setCardsInDeck] = useState([]);
   const [selectedClass, setSelectedClass] = useState();
   const [filterQueryString, setFilterQueryString] = useState();
-  console.log(filterQueryString)
+
   const handleDrop = (item) => {
     setCardsInDeck((prev) => [...prev, item.card]);
   };

@@ -1,5 +1,11 @@
 .deckinfo{
     display: flex;
+    height: 80px;
     justify-content: space-around;
     align-items: center;
+    background-color: burlywood;
+}
+
+.rarity-pie {
+  height: 50px;
 }

@@ -25,7 +25,7 @@ function Deck({ onDrop }) {
     accept: 'CARD',
     drop: (item) => {
       onDrop(item);
-
+      
       setCardsInDeck((prevCards) => {
         const cardIndex = prevCards.findIndex(card => card._id === item.card._id);
 
@@ -62,27 +62,30 @@ function Deck({ onDrop }) {
   }
 
   return (
-    <div className="deck-container" ref={drop}
-    >
+    // <div className="deck-container" ref={drop}
+    // >
+    <>
       <div className="deck"
-
+    
         ref={drop}
         style={{
-          backgroundColor: isOver ? 'lightgreen' : 'white',
+          backgroundColor: isOver ? 'lightgreen' : 'burlywood',
         }}>
 
-        <h3>Deck</h3>
         <div className="current-deck">
-
+        <h3>Deck</h3>
           {cardsInDeck && cardsInDeck.map((card) => {
             return <CardCompact key={card._id} card={card} count={card.count} />
           })}
         </div>
-      </div>
+      <div className="deck-bottom">
       <Trashcan onDelete={handleTrashCanDrop} />
       <button onClick={() => { onSave(cardsInDeck) }}>Save deck</button>
+      </div>
+      </div>
+    </>
 
-    </div>
+    // </div>
   );
 };
 

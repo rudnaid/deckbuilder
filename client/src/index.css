@@ -30,6 +30,7 @@ a:hover {
 body {
   margin: 0;
   font-family: 'BelweBold', sans-serif;
+  height: 100%;
 }
 
 h1 {
@@ -90,10 +91,10 @@ button:focus-visible {
   }
 }
 
-.stash, .deck {
+/* .stash, .deck {
   grid-column: span 1;
   background-color: #eaeaea;
   height: auto;
   overflow: auto;
-}
+} */
 

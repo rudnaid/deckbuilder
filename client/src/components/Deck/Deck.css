@@ -1,8 +1,41 @@
-.deck {
+.deck-container {
   display: flex;
-	height: 100%;
-	width: '100%';
+  flex-wrap: wrap;
+  justify-content: center;
+	max-height: 80%;
 	border: '1px solid black';
 	color: 'black';
   background-color: burlywood;
+  position: relative;
+  overflow: hidden;
+}
+
+.deck {
+  /* height: 80%; */
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  position: fixed;
+  width: 300px;
+  top: 80px;
+  right: 0;
+  margin-bottom: 60px;
+  background-color: burlywood;
+  overflow: auto;
+  padding-bottom: 80px;
+}
+
+.deck-bottom { 
+  height: fit-content;
+  flex: 1;
+  background-color: burlywood;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+}
+
+.current-deck {
+  max-height: 500px;
 }

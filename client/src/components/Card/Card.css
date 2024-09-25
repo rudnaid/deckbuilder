@@ -1,7 +1,4 @@
 .card {
-	/* display: inline-block; */
-	/* padding: 8px; */
-	/* margin-bottom: 4px; */
 	max-width: 269px;
 	max-height: 372px;
   padding: 10px;
@@ -9,8 +6,6 @@
 }
 
 img {
-  /* transform: scale(0.65); */
 	max-width: 269px;
 	max-height: 372px;
-	/* display: block; */
 }
