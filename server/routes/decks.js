@@ -49,7 +49,7 @@ deckRouter.patch("/:id", async (req, res, next) => {
   try {
     const updated = await Deck.findOneAndUpdate(
       { _id: id },
-      { $set: { ...req.body.deck } },
+      { $set: { ...req.body} },
       { new: true }
     );
     res.status(200).json(updated);
