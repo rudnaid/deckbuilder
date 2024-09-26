@@ -12,31 +12,35 @@
 }
 
 .manaCostWrapper {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  z-index: 1;
-  margin-right: 10px;/
+  display:flex;
+  gap: 0.5rem
 }
 
 .manaCostWrapper:hover {
   cursor: pointer;
 }
 
-.manaCost {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2em;
-  color: white;
-  text-shadow: 1px 1px 2px black;
-}
-
-
 .filter-settings form {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   width: fit-content;
+  gap:1rem
+}
+
+.manacost {
+  display: grid;
+  place-items: center; /* Centers content horizontally and vertically */
+}
+.manacost img{
+  grid-row: 1;
+  grid-column: 1;
+
+}
+.manacost div{
+  grid-row: 1;
+  grid-column: 1;
+  font-size: 1.5em;
+  color: white;
+  text-shadow: 1px 1px 2px black;
 }

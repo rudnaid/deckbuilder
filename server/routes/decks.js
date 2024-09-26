@@ -14,20 +14,20 @@ deckRouter.get("/", async (req, res, next) => {
 });
 
 deckRouter.post("/", async (req, res, next) => {
-  const { deck, userId } = req.body;
+  const deck = req.body;
 
   try {
     const saved = await Deck.create(deck);
-    const user = await User.findById(userId);
+    // const user = await User.findById(userId);
 
-    if (!user) {
-      res.status(500).json({ error: "User not found" });
-    }
-    await User.findByIdAndUpdate(
-      userId,
-      { $set: { decks: [...user.decks, saved._id] } },
-      { new: true }
-    );
+    // if (!user) {
+    //   res.status(500).json({ error: "User not found" });
+    // }
+    // await User.findByIdAndUpdate(
+    //   userId,
+    //   { $set: { decks: [...user.decks, saved._id] } },
+    //   { new: true }
+    // );
     return res.json(saved);
   } catch (error) {
     next(error);

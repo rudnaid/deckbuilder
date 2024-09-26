@@ -1,26 +1,31 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDrop } from "react-dnd";
 import CardCompact from "../CardCompact/CardCompact.jsx";
 import "./Deck.css";
 import Trashcan from "../Trashcan.jsx";
 
-// const saveDeck = (deck) => {
-//   const deckToSave = deck.map((card) => {
-//     return { cardId: card._id, count: card.count };
-//   });
-//   return fetch("/api/deck/", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `${localStorage.getItem("token")}`,
-//     },
-//     body: JSON.stringify(deckToSave),
-//   }).then((res) => res.json());
-// };
+const saveDeck = async (deck, deckname) => {
+  const deckToSave = {
+    name: deckname,
+    cards: [
+      ...deck.map((card) => {
+        return { cardId: card._id, count: card.count };
+      }),
+    ],
+  };
+  console.log(deckToSave);
+  return fetch("/api/deck/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(deckToSave),
+  }).then((res) => res.json());
+};
 
 function Deck({ onDrop }) {
   const [cardsInDeck, setCardsInDeck] = useState([]);
-
+  const deckName = useRef();
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: "CARD",
     drop: (item) => {
@@ -53,7 +58,8 @@ function Deck({ onDrop }) {
   }));
 
   const onSave = async (deck) => {
-    saveDeck(deck)
+    console.log(deckName);
+    saveDeck(deck, deckName.current)
       .then((res) => {
         setCardsInDeck([]);
       })
@@ -79,6 +85,11 @@ function Deck({ onDrop }) {
       >
         <div>
           <h3>Deck</h3>
+          <input
+            type="text"
+            placeholder="deckname"
+            onChange={(e) => (deckName.current = e.target.value)}
+          />
         </div>
 
         <div className="current-deck">
@@ -91,13 +102,13 @@ function Deck({ onDrop }) {
         </div>
         <div className="deck-bottom">
           <Trashcan onDelete={handleTrashCanDrop} />
-          {/* <button
+          <button
             onClick={() => {
-              onSave(cardsInDeck);
+              onSave(cardsInDeck, deckName);
             }}
           >
             Save deck
-          </button> */}
+          </button>
         </div>
       </div>
     </>
