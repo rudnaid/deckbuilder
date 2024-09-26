@@ -79,19 +79,22 @@ function Deck({ onDrop }) {
       <div
         className="deck"
         ref={drop}
-        style={{
-          backgroundColor: isOver ? "lightgreen" : "burlywood",
-        }}
+        style={
+          {
+            // backgroundColor: isOver ? "lightgreen" : "burlywood",
+          }
+        }
       >
-        <div>
-          <h3>Deck</h3>
-          <input
-            type="text"
-            placeholder="deckname"
-            onChange={(e) => (deckName.current = e.target.value)}
-          />
+        <div className="top-container-wrapper">
+          <div className="top-container">
+            <h3>Deck</h3>
+            <input
+              type="text"
+              placeholder="deckname"
+              onChange={(e) => (deckName.current = e.target.value)}
+            />
+          </div>
         </div>
-
         <div className="current-deck">
           {cardsInDeck &&
             cardsInDeck.map((card) => {
@@ -100,15 +103,17 @@ function Deck({ onDrop }) {
               );
             })}
         </div>
-        <div className="deck-bottom">
-          <Trashcan onDelete={handleTrashCanDrop} />
-          <button
-            onClick={() => {
-              onSave(cardsInDeck, deckName);
-            }}
-          >
-            Save deck
-          </button>
+        <div className="bottom-bar-wrapper">
+          <div className="deck-bottom">
+            <Trashcan onDelete={handleTrashCanDrop} />
+            <button
+              onClick={() => {
+                onSave(cardsInDeck, deckName);
+              }}
+            >
+              Save deck
+            </button>
+          </div>
         </div>
       </div>
     </>

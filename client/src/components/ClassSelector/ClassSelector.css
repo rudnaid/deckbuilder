@@ -1,3 +1,8 @@
 .class-selector{
-    min-height: 600px;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    align-items: center;
+    justify-content: space-between;
+    height: 70vh;
 }

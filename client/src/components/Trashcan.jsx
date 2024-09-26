@@ -18,9 +18,7 @@ function Trashcan({ onDelete }) {
     <div className="trash">
       <div
         ref={drop}
-        style={{
-          backgroundColor: isOver ? 'red' : 'burlywood',
-        }}>
+        >
         ❌
       </div>
     </div>
