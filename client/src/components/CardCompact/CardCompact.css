@@ -1,8 +1,11 @@
 .cardCompact {
+  right: -10px;
   display: flex;
   align-items: center;
   position: relative;
   margin-top: 3px;
+  background: url('../../assets/side.png') right ;
+  padding-right: 10px;
 }
 
 .manaCrystalWrapper {
@@ -57,6 +60,6 @@
 .count {
   margin-left: 10px;
   font-size: 1.1em;
-  color: black;
+  color: rgb(255, 255, 255);
 
 }
