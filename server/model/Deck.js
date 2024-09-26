@@ -5,7 +5,11 @@ const deckSchema = new Schema({
   name: { type: String, required: true },
   cards: [
     {
-      cardId: Schema.Types.ObjectId,
+      cardId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Card'
+      }
+      ,
       count: Number,
     },
   ],
