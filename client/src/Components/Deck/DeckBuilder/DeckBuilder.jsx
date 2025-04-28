@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { useDrop } from "react-dnd";
+import {useRef, useState} from "react";
+import {useDrop} from "react-dnd";
 import CardCompact from "../../Cards/CardCompact/CardCompact.jsx";
 import "./DeckBuilder.css";
 import Trashcan from "../../Trashcan.jsx";
@@ -9,7 +9,7 @@ const saveDeck = async (deck, deckname) => {
     name: deckname,
     cards: [
       ...deck.map((card) => {
-        return { cardId: card._id, count: card.count };
+        return {cardId: card._id, count: card.count};
       }),
     ],
   };
@@ -23,10 +23,10 @@ const saveDeck = async (deck, deckname) => {
   }).then((res) => res.json());
 };
 
-function DeckBuilder({ onDrop }) {
+const DeckBuilder = ({onDrop}) => {
   const [cardsInDeck, setCardsInDeck] = useState([]);
   const deckName = useRef();
-  const [{ canDrop, isOver }, drop] = useDrop(() => ({
+  const [{canDrop, isOver}, drop] = useDrop(() => ({
     accept: "CARD",
     drop: (item) => {
       onDrop(item);
@@ -43,11 +43,11 @@ function DeckBuilder({ onDrop }) {
 
           return prevCards.map((card, index) =>
             index === cardIndex
-              ? { ...card, count: card.count ? card.count + 1 : 2 }
+              ? {...card, count: card.count ? card.count + 1 : 2}
               : card
           );
         } else {
-          return [...prevCards, { ...item.card, count: 1 }];
+          return [...prevCards, {...item.card, count: 1}];
         }
       });
     },
@@ -60,7 +60,7 @@ function DeckBuilder({ onDrop }) {
   const onSave = async (deck) => {
     console.log(deckName);
     saveDeck(deck, deckName.current)
-      .then((res) => {
+      .then(() => {
         setCardsInDeck([]);
       })
       .catch((error) => console.log(error));
@@ -73,17 +73,10 @@ function DeckBuilder({ onDrop }) {
   }
 
   return (
-    // <div className="deck-container" ref={drop}
-    // >
     <>
       <div
         className="deck"
         ref={drop}
-        style={
-          {
-            // backgroundColor: isOver ? "lightgreen" : "burlywood",
-          }
-        }
       >
         <div className="top-container-wrapper">
           <div className="top-container">
@@ -99,13 +92,13 @@ function DeckBuilder({ onDrop }) {
           {cardsInDeck &&
             cardsInDeck.map((card) => {
               return (
-                <CardCompact key={card._id} card={card} count={card.count} />
+                <CardCompact key={card._id} card={card} count={card.count}/>
               );
             })}
         </div>
         <div className="bottom-bar-wrapper">
           <div className="deck-bottom">
-            <Trashcan onDelete={handleTrashCanDrop} />
+            <Trashcan onDelete={handleTrashCanDrop}/>
             <button
               onClick={() => {
                 onSave(cardsInDeck, deckName);
@@ -117,8 +110,6 @@ function DeckBuilder({ onDrop }) {
         </div>
       </div>
     </>
-
-    // </div>
   );
 }
 
