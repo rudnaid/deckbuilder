@@ -1,6 +1,6 @@
 import { useDrop } from "react-dnd";
 
-function Trashcan({ onDelete }) {
+const Trashcan = ({ onDelete }) => {
 
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: 'CARD-COMPACT',
