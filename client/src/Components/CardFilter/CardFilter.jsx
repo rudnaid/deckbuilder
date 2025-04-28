@@ -1,16 +1,16 @@
 import "./CardFilter.css";
-import { useRef } from "react";
+import {useRef} from "react";
 import SelectTemplate from "./SelectTemplate.jsx";
 import ManaCostSelector from "./ManaCostSelector.jsx";
 import useFetchData from "../../Hooks/useFetchData";
 import {createQueryString} from "../../Utils/utils.js";
 
-function CardFilter({ setFilter }) {
+const CardFilter = ({setFilter}) => {
   const filterOptions = useRef()
-  const { data: metaData, loading, error } = useFetchData("/api/meta");
+  const {data: metaData, loading, error} = useFetchData("/api/meta");
 
-  const handleFilter = (type, value) =>{
-    filterOptions.current = {...filterOptions.current, [type]:value}
+  const handleFilter = (type, value) => {
+    filterOptions.current = {...filterOptions.current, [type]: value}
     setFilter(createQueryString(filterOptions.current));
   }
 
@@ -43,7 +43,7 @@ function CardFilter({ setFilter }) {
           onChange={handleFilter}
         />
 
-        <ManaCostSelector onClick={handleFilter} />
+        <ManaCostSelector onClick={handleFilter}/>
 
       </form>
     </div>
