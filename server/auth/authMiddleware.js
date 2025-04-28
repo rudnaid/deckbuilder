@@ -1,12 +1,16 @@
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-const authMiddleWare = (req, res, next) => {
-  console.log(req.get('Authorization'));
+const authMiddleware = (req, res, next) => {
+  const authHeader = req.headers.authorization;
 
-  const token = req.get('Authorization');
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ error: "No token, authorization denied" });
+  }
+
+  const token = authHeader.split(" ")[1];
   if (!token) {
-    return res.status(401).json({ message: "No Token found" });
+    return res.status(401).json({ error: "No token, authorization denied" });
   }
 
   try {
@@ -14,8 +18,8 @@ const authMiddleWare = (req, res, next) => {
     req.user = decoded.user;
     next();
   } catch (error) {
-    res.status(403).json({ message: "Token is not valid" });
+    res.status(401).json({ error: "Token is not valid" });
   }
 };
 
-export default authMiddleWare;
+export default authMiddleware;
