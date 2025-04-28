@@ -1,7 +1,7 @@
 import { useDrag } from 'react-dnd';
 import './Card.css';
 
-function Card({ card }) {
+const Card = ({ card }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CARD',
     item: { card },
@@ -13,12 +13,10 @@ function Card({ card }) {
   return (
     <div
       ref={drag}
-      style={{
-        opacity: isDragging ? 0.5 : 1
-      }}
+      style={{opacity: isDragging ? 0.5 : 1}}
       className={"card"}
     >
-      <img src={card.image}></img>
+      <img src={card.image} alt="card-img"></img>
     </div>
   );
 }
