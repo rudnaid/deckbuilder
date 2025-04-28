@@ -20,7 +20,7 @@ const saveDeck = (deck) => {
   }).then((res) => res.json());
 };
 
-function DeckInfo({ deck }) {
+const DeckInfo = ({ deck }) => {
   const [cardsInDeck, setCardsInDeck] = useState(deck);
   const [totalManaCost, setTotalManaCost] = useState(0);
   const [craftingCost, setCraftingCost] = useState(0);
