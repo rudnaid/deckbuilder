@@ -9,18 +9,26 @@ const useFetchData = (url) => {
     async function fetchData() {
       setLoading(true)
       try {
-        const response = await fetch(url)
+        const token = localStorage.getItem('token');
+
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {"Authorization": `Bearer ${token}`},
+        })
+
         if (!response.ok) {
-          setError(response.status)
+          setError(response.status);
+          return;
         }
-        const data = await response.json()
+        
+        const data = await response.json();
         setData(data)
       } catch (error) {
         setError(error)
       } finally {
         setLoading(false)
       }
-    };
+    }
     fetchData()
   }, [url])
 
