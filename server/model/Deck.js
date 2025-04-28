@@ -15,4 +15,4 @@ const deckSchema = new Schema({
   ],
 });
 
-export default model("Deck", deckSchema);
+export default model("DeckBuilder", deckSchema);

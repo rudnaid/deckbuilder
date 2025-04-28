@@ -1,6 +1,5 @@
 import { Router } from "express";
 import Deck from "../model/Deck.js";
-import User from "../model/User.js";
 
 const deckRouter = Router();
 
@@ -18,16 +17,7 @@ deckRouter.post("/", async (req, res, next) => {
 
   try {
     const saved = await Deck.create(deck);
-    // const user = await User.findById(userId);
 
-    // if (!user) {
-    //   res.status(500).json({ error: "User not found" });
-    // }
-    // await User.findByIdAndUpdate(
-    //   userId,
-    //   { $set: { decks: [...user.decks, saved._id] } },
-    //   { new: true }
-    // );
     return res.json(saved);
   } catch (error) {
     next(error);

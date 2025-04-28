@@ -1,0 +1,19 @@
+.deck-builder{
+  background-image: url('../../assets/imgs/siege-of-orgrimmar.png');
+  background-position: center right;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.bottom-container {
+  width: 100%;
+  height: 150px;
+margin-top: auto;  
+
+}
+.bottom-container div{
+  overflow-x: hidden;
+}
+
