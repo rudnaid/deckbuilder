@@ -17,7 +17,7 @@ function LandingPage() {
     setCardsInDeck((prev) => [...prev, item.card]);
   };
 
-  function handleSelect(chosenClass) {
+  const handleSelect = (chosenClass) => {
     setSelectedClass(`&classId=${chosenClass},12`);
   }
 
@@ -34,9 +34,11 @@ function LandingPage() {
           )}
           <DeckBuilder onDrop={handleDrop} />
         </div>
+
         <div className="bottom-container">
           <DeckInfo deck={cardsInDeck} />
         </div>
+
       </DndProvider>
     </>
   );
