@@ -10,7 +10,7 @@ const fetchCards = async ({pageParam = 1, selected = "", filter = ""}) => {
   return response.json();
 };
 
-export function useInfiniteCards(selected, filter) {
+const useInfiniteCards = (selected, filter) => {
   const query = useInfiniteQuery({
     queryKey: ['cards', selected, filter],
     queryFn: ({pageParam = 1}) => fetchCards({pageParam, selected, filter}),
