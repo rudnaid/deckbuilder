@@ -1,0 +1,49 @@
+services:
+  deckbuilder-mongodb:
+    image: mongo:7.0
+    container_name: deckbuilder-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=deckbuilder
+    volumes:
+      - mongodb-data:/data/db
+      - ./mongo-init/dump:/dump
+      - ./mongo-init/restore.sh:/docker-entrypoint-initdb.d/restore.sh
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/deckbuilder --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    command: ["bash", "-c", "chmod +x /docker-entrypoint-initdb.d/restore.sh && docker-entrypoint.sh mongod"]
+
+  deckbuilder-backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: deckbuilder-backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      deckbuilder-mongodb:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=mongodb://deckbuilder-mongodb:27017/deckbuilder
+      - SERVER_PORT=3000
+    restart: unless-stopped
+
+  deckbuilder-frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: deckbuilder-frontend
+    ports:
+      - "4000:80"
+    depends_on:
+      - deckbuilder-backend
+    restart: unless-stopped
+
+volumes:
+  mongodb-data:

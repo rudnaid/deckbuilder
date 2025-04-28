@@ -6,7 +6,9 @@ const fetchCards = async ({pageParam = 1, selected = "", filter = ""}) => {
   try {
     const token = localStorage.getItem('token');
 
-    const response = await fetch(`/api/cards?page=${pageParam}&limit=${LIMIT}${selected}${filter}`, {
+    const filterPrefix = (selected && filter) ? '&' : '';
+
+    const response = await fetch(`/api/cards?page=${pageParam}&limit=${LIMIT}${selected}${filterPrefix}${filter}`, {
       method: "GET",
       headers: {"Authorization": `Bearer ${token}`}
     });
