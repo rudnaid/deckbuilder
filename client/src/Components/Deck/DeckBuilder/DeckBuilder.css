@@ -1,5 +1,5 @@
 .top-container-wrapper{
-  background: url('../../assets/topbar.png') center center / 80% ;
+  background: url('../../../assets/imgs/topbar.png') center center / 80% ;
   background-size: cover;
   width: 100%;
 }
@@ -16,7 +16,7 @@
   background-color: burlywood;
   width: 20%;
   border-radius: 2rem;
-  background: url('../../assets/sidebar.png') center center / 100% repeat-y;
+  background: url('../../../assets/imgs/sidebar.png') center center / 100% repeat-y;
   background-color: burlywood;
 }
 .top-container{
@@ -42,7 +42,7 @@
 
 .bottom-bar-wrapper{
   margin-top: auto;
-  background: url('../../assets/bottombar.png') center center / 80% ;
+  background: url('../../../assets/imgs/bottombar.png') center center / 80% ;
   background-size: cover;
   width: 100%;
 }

@@ -4,7 +4,7 @@
   align-items: center;
   position: relative;
   margin-top: 3px;
-  background: url('../../assets/side.png') right ;
+  background: url('../../../assets/imgs/side.png') right ;
   padding-right: 10px;
 }
 

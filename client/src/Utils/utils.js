@@ -13,7 +13,7 @@ export function collectRarityData(deck) {
     labels: ["Free", "Common", "Rare", "Epic", "Legendary"],
     datasets: [
       {
-        label: 'Card Rarity Distribution', // Title for the dataset
+        label: 'Card Rarity Distribution',
         data: [0, 0, 0, 0, 0],
         backgroundColor: [
           'rgba(255, 255, 255, 0.9)',  // Free
@@ -27,7 +27,6 @@ export function collectRarityData(deck) {
     ],
   };
 
-  // Count the number of cards for each rarity
   deck.forEach((card) => {
     rarityData.datasets[0].data[card.rarityId - 1]++;
   });
@@ -43,3 +42,8 @@ export function calculateCraftingCost(deck) {
   });
   return craftingCost;
 }
+
+export const createQueryString = (filters) => {
+  const queryString = new URLSearchParams(filters);
+  return queryString.toString();
+};

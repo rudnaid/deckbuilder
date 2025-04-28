@@ -1,4 +1,4 @@
-export default function InputTemplate({label, filter, objectKey, data, onChange, type}) {
+export default function SelectTemplate({label, filter, objectKey, data, onChange, type}) {
     return (
       <label>
         {label}

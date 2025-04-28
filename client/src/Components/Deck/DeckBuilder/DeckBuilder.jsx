@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { useDrop } from "react-dnd";
-import CardCompact from "../CardCompact/CardCompact.jsx";
-import "./Deck.css";
-import Trashcan from "../Trashcan.jsx";
+import CardCompact from "../../Cards/CardCompact/CardCompact.jsx";
+import "./DeckBuilder.css";
+import Trashcan from "../../Trashcan.jsx";
 
 const saveDeck = async (deck, deckname) => {
   const deckToSave = {
@@ -23,7 +23,7 @@ const saveDeck = async (deck, deckname) => {
   }).then((res) => res.json());
 };
 
-function Deck({ onDrop }) {
+function DeckBuilder({ onDrop }) {
   const [cardsInDeck, setCardsInDeck] = useState([]);
   const deckName = useRef();
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
@@ -122,4 +122,4 @@ function Deck({ onDrop }) {
   );
 }
 
-export default Deck;
+export default DeckBuilder;

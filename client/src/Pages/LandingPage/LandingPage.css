@@ -1,5 +1,5 @@
 .deck-builder{
-  background-image: url('../../assets/siege-of-orgrimmar.png');
+  background-image: url('../../assets/imgs/siege-of-orgrimmar.png');
   background-position: center right;
   display: grid;
   grid-template-columns: 3fr 1fr;

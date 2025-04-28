@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { calculateTotalManaCost, calculateCraftingCost, collectRarityData } from '../../utils/utils';
+import { calculateTotalManaCost, calculateCraftingCost, collectRarityData } from '../../../Utils/utils.js';
 import './DeckInfo.css';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,);

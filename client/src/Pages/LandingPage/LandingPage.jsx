@@ -1,14 +1,14 @@
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useState } from "react";
-import CardDisplay from "../CardDisplay/CardDisplay.jsx";
-import Deck from "../Deck/Deck.jsx";
-import DeckInfo from "../DeckInfo/DeckInfo.jsx";
-import ClassSelector from "../ClassSelector/ClassSelector.jsx";
-import FilterSettings from "../FilterSettings/FilterSettings.jsx";
-import "./DeckBuilder.css";
+import CardDisplay from "../../Components/Cards/CardDisplay/CardDisplay.jsx";
+import DeckBuilder from "../../Components/Deck/DeckBuilder/DeckBuilder.jsx";
+import DeckInfo from "../../Components/Deck/DeckInfo/DeckInfo.jsx";
+import ClassSelector from "../../Components/ClassSelector/ClassSelector.jsx";
+import CardFilter from "../../Components/CardFilter/CardFilter.jsx";
+import "./LandingPage.css";
 
-function DeckBuilder() {
+function LandingPage() {
   const [cardsInDeck, setCardsInDeck] = useState([]);
   const [selectedClass, setSelectedClass] = useState();
   const [filterQueryString, setFilterQueryString] = useState();
@@ -25,14 +25,14 @@ function DeckBuilder() {
     <>
       <DndProvider backend={HTML5Backend}>
         <div className="deck-builder">
-          <FilterSettings setFilter={setFilterQueryString} />
+          <CardFilter setFilter={setFilterQueryString} />
 
           {selectedClass ? (
             <CardDisplay selected={selectedClass} filter={filterQueryString} />
           ) : (
             <ClassSelector onClick={handleSelect} />
           )}
-          <Deck onDrop={handleDrop} />
+          <DeckBuilder onDrop={handleDrop} />
         </div>
         <div className="bottom-container">
           <DeckInfo deck={cardsInDeck} />
@@ -42,4 +42,4 @@ function DeckBuilder() {
   );
 }
 
-export default DeckBuilder;
+export default LandingPage;

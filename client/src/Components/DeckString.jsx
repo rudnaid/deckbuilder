@@ -1,4 +1,4 @@
-import { encodeDeckString } from "../utils/deckStringCodec";
+import { encodeDeckString } from "../Utils/deckStringCodec";
 
 function DeckString({ deck }) {
   return (

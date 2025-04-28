@@ -1,18 +1,14 @@
-import "./FilterSettings.css";
-import { useState, useEffect, useRef } from "react";
-import InputTemplate from "./InputTemplate";
-import ManaCost from "./ManaCost";
-import useFetchData from "../../hooks/useFetchData";
+import "./CardFilter.css";
+import { useRef } from "react";
+import SelectTemplate from "./SelectTemplate.jsx";
+import ManaCostSelector from "./ManaCostSelector.jsx";
+import useFetchData from "../../Hooks/useFetchData";
+import {createQueryString} from "../../Utils/utils.js";
 
-function FilterSettings({ setFilter }) {
+function CardFilter({ setFilter }) {
   const filterOptions = useRef()
   const { data: metaData, loading, error } = useFetchData("/api/meta");
 
-  const createQueryString = (filters) => {
-    const queryString = new URLSearchParams(filters);
-    console.log(queryString.toString())
-    setFilter(queryString.toString())
-  };
   const handleFilter = (type, value) =>{
     filterOptions.current = {...filterOptions.current, [type]:value}
     createQueryString(filterOptions.current)
@@ -27,19 +23,18 @@ function FilterSettings({ setFilter }) {
 
   return (
     <div className="filter-settings">
-      FilterSettings
       <form>
 
-        <InputTemplate
+        <SelectTemplate
           label="Type"
           filter="types"
           objectKey="name"
           type="type"
           data={metaData[0]}
           onChange={handleFilter}
-
         />
-        <InputTemplate
+
+        <SelectTemplate
           label="Rarity"
           filter="rarities"
           objectKey="slug"
@@ -47,10 +42,12 @@ function FilterSettings({ setFilter }) {
           data={metaData[0]}
           onChange={handleFilter}
         />
-        <ManaCost onClick={handleFilter} />
+
+        <ManaCostSelector onClick={handleFilter} />
+
       </form>
     </div>
   );
 }
 
-export default FilterSettings;
+export default CardFilter;
