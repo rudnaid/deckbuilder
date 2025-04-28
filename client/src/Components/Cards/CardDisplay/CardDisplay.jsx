@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import CardsContainer from '../CardsContainer/CardsContainer.jsx';
 import { useInView } from "react-intersection-observer";
-import useInfiniteCards from '../../../hooks/useInfiniteCards';
+import useInfiniteCards from '../../../Hooks/useInfiniteCards';
 
 const CardDisplay = ({ selected, filter }) => {
   const { ref, inView } = useInView();
