@@ -3,11 +3,20 @@ import {useInfiniteQuery} from '@tanstack/react-query';
 const LIMIT = 20;
 
 const fetchCards = async ({pageParam = 1, selected = "", filter = ""}) => {
-  const response = await fetch(`/api/cards?page=${pageParam}&limit=${LIMIT}${selected}${filter}`);
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
+  try {
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(`/api/cards?page=${pageParam}&limit=${LIMIT}${selected}${filter}`, {
+      method: "GET",
+      headers: {"Authorization": `Bearer ${token}`}
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  } catch (error) {
+    console.error(error);
   }
-  return response.json();
 };
 
 const useInfiniteCards = (selected, filter) => {

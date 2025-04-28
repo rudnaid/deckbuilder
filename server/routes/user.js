@@ -3,20 +3,17 @@ import User from "../model/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { check, validationResult } from "express-validator";
-import authMiddleWare from "../auth/authMiddleware.js";
+import authMiddleware from "../auth/authMiddleware.js";
 import "dotenv/config";
-
-
 
 const userRouter = Router();
 
 userRouter.post(
-  "/login",
+  "/register",
   [
-    check("username", "please include valis username").exists(),
-    check("password", "password is required").exists(),
+    check("username", "Username is required").exists(),
+    check("password", "Password must be 6+ characters").isLength({ min: 6 }),
   ],
-  authMiddleWare,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -26,100 +23,62 @@ userRouter.post(
     const { username, password } = req.body;
 
     try {
-      let user = await User.findOne({ username: username });
-      if (!user) {
-        return res.status(400).json({ msg: "invalid credentials" });
-      }
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        return res.status(400).json({ msg: "invalid credentials" });
+      let user = await User.findOne({ username });
+      if (user) {
+        return res.status(400).json({ error: "User already exists" });
       }
 
-      const payload = {
-        user: {
-          id: user._id,
-        },
-      };
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
 
-      jwt.sign(
-        payload,
-        process.env.JWT_SECRET,
-        { expiresIn: "1y" },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+      user = new User({ username, password: hashedPassword });
+      await user.save();
+
+      const payload = { user: { username: user.username } };
+      const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+      res.status(201).json({ token });
     } catch (error) {
-      if (error) throw error;
-      console.error(error.message);
+      res.status(500).json({ error: "Server error" });
     }
   }
 );
 
 userRouter.post(
-  "/register",
-  [
-    check("username", "Please provide valid email").exists(),
-    check("password", "Please provide a pw with 6 or more").isLength({
-      min: 6,
-    }),
-  ],
+  "/login",
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
     const { username, password } = req.body;
 
     try {
-      let user = await User.findOne({
-        username,
-      });
-
-      if (user) {
-        return res.status(400).json({ msg: "user already exists" });
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res.status(400).json({ error: "Invalid credentials" });
       }
 
-      user = new User({
-        username,
-        password,
-      });
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ error: "Invalid credentials" });
+      }
 
-      const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt);
-      await user.save();
+      const payload = { user: { username: user.username } };
+      const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1y" });
 
-      const payload = {
-        user: {
-          id: user._id,
-        },
-      };
-
-      jwt.sign(
-        payload,
-        process.env.JWT_SECRET,
-        { expiresIn: "1h" },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+      res.json({ token });
     } catch (error) {
-      console.error(error.message);
-      res.status(500).json({ success: "false" });
+      res.status(500).json({ error: "Server error" });
     }
   }
 );
 
-userRouter.get("/profile",authMiddleWare , async (req, res) => {
+userRouter.get("/profile", authMiddleware, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await User.findOne({ username: req.user.username }).select("-password");
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
     res.json(user);
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send("server error");
+    res.status(500).json({ error: "Server error" });
   }
 });
 
