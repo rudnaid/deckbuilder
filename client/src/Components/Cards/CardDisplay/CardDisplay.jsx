@@ -4,58 +4,31 @@ import { useInView } from "react-intersection-observer";
 import { useInfiniteCards } from '../../../hooks/useInfiniteCards';
 
 function CardDisplay({ selected, filter }) {
-  const queryClient = useQueryClient()
-  const LIMIT = 20;
-  const fetchCards = async ({ pageParam = 1 }) => {
-    const response = await fetch(`/api/cards?page=${pageParam}&limit=${LIMIT}${selected}&${filter}`);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const newCards = await response.json();
-    return newCards;
-  };
-
-  const { data, error, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['cards', filter],
-    queryFn: fetchCards,
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.length === LIMIT ? allPages.length + 1 : undefined;
-    },
-  })
-
-  useEffect(() => {
-    queryClient.invalidateQueries(['cards', filter])
-  }, [filter, queryClient])
-
-  const { ref, inView } = useInView()
-
+  const { ref, inView } = useInView();
+  const {
+    data,
+    error,
+    status,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteCards(selected, filter);
 
   useEffect(() => {
     if (inView) {
       fetchNextPage();
     }
-  }, [fetchNextPage, inView])
+  }, [fetchNextPage, inView]);
 
-  if (status === 'pending') {
-    return <div>loading...</div>
-  }
-  if (status === 'error') {
-    return <div>{error.message}</div>
-  }
+  if (status === 'pending') return <div>loading...</div>;
+  if (status === 'error') return <div>{error.message}</div>;
 
   const allCards = data.pages.flat();
 
-
-
   return (
-    <>
-      <div className="card-display">
-        <CardsContainer cards={allCards} refe={ref} isFetchingNextPage={isFetchingNextPage} />
-
-      </div>
-    </>
-  )
+    <div className="card-display">
+      <CardsContainer cards={allCards} refe={ref} isFetchingNextPage={isFetchingNextPage} />
+    </div>
+  );
 }
 
 export default CardDisplay;
