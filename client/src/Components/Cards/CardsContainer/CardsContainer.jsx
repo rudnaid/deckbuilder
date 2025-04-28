@@ -1,7 +1,7 @@
 import Card from "../Card/Card.jsx"
 import './CardsContainer.css';
 
-function CardsContainer({ cards, refe, isFetchingNextPage}) {
+const CardsContainer = ({ cards, refe, isFetchingNextPage}) => {
   return (
     <div className="cards-container">
       {cards.map((card) => {
