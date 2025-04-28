@@ -1,17 +1,16 @@
 function createPipeline(query, startIndex, limit) {
-  console.log(query)
   let pipeline =
 	[
     { $match: query },
     {
       $group: {
-        _id: "$name", // Group by the 'name' field
-        docWithLargestId: { $max: "$id" }, // Get the largest 'id'
-        document: { $first: "$$ROOT" } // Keep the whole document with the largest id
+        _id: "$name",
+        docWithLargestId: { $max: "$id" },
+        document: { $first: "$$ROOT" }
       }
     },
     {
-      $replaceRoot: { newRoot: "$document" } // Replace the root to return the full document
+      $replaceRoot: { newRoot: "$document" }
     },
     { $sort: { manaCost : 1} },
     { $skip: startIndex },
