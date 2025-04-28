@@ -1,17 +1,15 @@
 import { useDrag } from 'react-dnd';
 import './CardCompact.css';
 
-function CardCompact({ card, count }) {
-  const [{ isDragging }, drag] = useDrag(() => ({
+const CardCompact = ({ card, count }) => {
+  const [, drag] = useDrag(() => ({
     type: 'CARD-COMPACT',
-    item: { card },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
+    item: { card }
   }));
 
   return (
     <div className="cardCompact" ref={drag}>
+
       <div className="manaCrystalWrapper">
         <img src="/mana-crystal.png" alt="mana crystal" />
         <div className="manaCost">{card.manaCost}</div>
