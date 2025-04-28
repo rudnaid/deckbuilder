@@ -1,4 +1,4 @@
-export default function ManaCostSelector({ onClick }) {
+export const ManaCostSelector = ({ onClick }) => {
   const totalCost = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
@@ -16,3 +16,5 @@ export default function ManaCostSelector({ onClick }) {
     </div>
   );
 }
+
+export default ManaCostSelector;
