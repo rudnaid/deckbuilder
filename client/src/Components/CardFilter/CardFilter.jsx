@@ -11,7 +11,7 @@ function CardFilter({ setFilter }) {
 
   const handleFilter = (type, value) =>{
     filterOptions.current = {...filterOptions.current, [type]:value}
-    createQueryString(filterOptions.current)
+    setFilter(createQueryString(filterOptions.current));
   }
 
   if (loading) {
