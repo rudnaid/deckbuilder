@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import mongoose from 'mongoose';
+import authMiddleware from "../auth/authMiddleware.js";
 
 const metaRouter = Router();
 
-metaRouter.get('/', async (req, res) => {
+metaRouter.get('/', authMiddleware, async (req, res) => {
 	try {
 		const result = await mongoose.connection.db
 			.collection('meta')
