@@ -1,8 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
-import cardsRouter from "./routes/cards.js";
 import cors from "cors";
+import cardsRouter from "./routes/cards.js";
 import userRouter from "./routes/user.js";
 import metaRouter from "./routes/meta.js";
 import deckRouter from "./routes/decks.js";
@@ -10,7 +10,18 @@ import deckRouter from "./routes/decks.js";
 const port = process.env.SERVER_PORT;
 const app = express();
 
-mongoose.connect(process.env.DATABASE_URL);
+const connectWithRetry = async () => {
+  try {
+    console.log('Attempting MongoDB connection...');
+    await mongoose.connect(process.env.DATABASE_URL);
+    console.log('MongoDB is connected');
+  } catch (err) {
+    console.error('MongoDB connection unsuccessful, retrying after 5 seconds.', err.message);
+    setTimeout(connectWithRetry, 5000);
+  }
+};
+
+connectWithRetry();
 
 app.use(cors());
 app.use(express.json());
