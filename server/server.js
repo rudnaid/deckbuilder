@@ -18,6 +18,4 @@ app.use("/api/cards", cardsRouter);
 app.use("/api/user", userRouter);
 app.use("/api/meta", metaRouter);
 app.use("/api/deck", deckRouter);
-app.listen(port, () => {
-  console.log("Server is listening on:" + port);
-});
+app.listen(port);
