@@ -12,9 +12,7 @@ const app = express();
 
 const connectWithRetry = async () => {
   try {
-    console.log('Attempting MongoDB connection...');
     await mongoose.connect(process.env.DATABASE_URL);
-    console.log('MongoDB is connected');
   } catch (err) {
     console.error('MongoDB connection unsuccessful, retrying after 5 seconds.', err.message);
     setTimeout(connectWithRetry, 5000);
