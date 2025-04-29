@@ -7,40 +7,17 @@ import './DeckInfo.css';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const saveDeck = (deck) => {
-  const deckToSave = deck.map((card) => {
-    return { cardId: card._id, count: card.count };
-  });
-  return fetch('/api/deck/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `${localStorage.getItem('token')}`,
-    },
-    body: JSON.stringify(deckToSave),
-  }).then((res) => res.json());
-};
-
-const DeckInfo = ({ deck }) => {
-  const [cardsInDeck, setCardsInDeck] = useState(deck);
+const DeckInfo = () => {
+  const { cardsInDeck, saveDeck } = useDeckContext();
   const [totalManaCost, setTotalManaCost] = useState(0);
   const [craftingCost, setCraftingCost] = useState(0);
   const [rarityDistribution, setRarityDistribution] = useState(null);
 
   useEffect(() => {
-    setCardsInDeck(deck);
-    setTotalManaCost(() => calculateTotalManaCost(deck));
-    setCraftingCost(() => calculateCraftingCost(deck));
-    setRarityDistribution(() => collectRarityData(deck));
-  }, [deck]);
-
-  const onSave = async (deck) => {
-    saveDeck(deck)
-      .then((res) => {
-        setCardsInDeck([]);
-      })
-      .catch((error) => console.log(error));
-  };
+    setTotalManaCost(() => calculateTotalManaCost(cardsInDeck));
+    setCraftingCost(() => calculateCraftingCost(cardsInDeck));
+    setRarityDistribution(() => collectRarityData(cardsInDeck));
+  }, [cardsInDeck]);
 
   return (
     <div className="deckinfo">
@@ -87,11 +64,9 @@ const DeckInfo = ({ deck }) => {
           </div>
 
           <button
-            onClick={() => {
-              onSave(cardsInDeck);
-            }}
+            onClick={saveDeck}
           >
-            Save deck
+            Save Deck
           </button>
         </>
       ) : (

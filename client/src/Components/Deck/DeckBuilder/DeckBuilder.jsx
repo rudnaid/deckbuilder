@@ -4,48 +4,20 @@ import CardDropZone from '../CardDropZone/CardDropZone.jsx';
 import { useDeckContext } from '../../../Context/DeckContext.jsx';
 import './DeckBuilder.css';
 
-const saveDeck = async (deck, deckname) => {
-  const deckToSave = {
-    name: deckname,
-    cards: [
-      ...deck.map((card) => {
-        return { cardId: card._id, count: card.count };
-      }),
-    ],
-  };
-  console.log(deckToSave);
-  return fetch('/api/deck/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(deckToSave),
-  }).then((res) => res.json());
-};
+const DeckBuilder = () => {
+  const {
+    cardsInDeck,
+    deckName,
+    setDeckName,
+    addCard,
+    removeCard,
+    saveDeck,
+  } = useDeckContext();
 
-const DeckBuilder = ({ onDrop }) => {
-  const [cardsInDeck, setCardsInDeck] = useState([]);
-  const deckName = useRef();
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: 'CARD',
     drop: (item) => {
-      onDrop(item);
-
-      setCardsInDeck((prevCards) => {
-        const cardIndex = prevCards.findIndex((card) => card._id === item.card._id);
-
-        if (cardIndex !== -1) {
-          if (prevCards[cardIndex].count === 2) {
-            return prevCards;
-          }
-
-          return prevCards.map((card, index) =>
-            index === cardIndex ? { ...card, count: card.count ? card.count + 1 : 2 } : card
-          );
-        } else {
-          return [...prevCards, { ...item.card, count: 1 }];
-        }
-      });
+      addCard(item);
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -53,50 +25,37 @@ const DeckBuilder = ({ onDrop }) => {
     }),
   }));
 
-  const onSave = async (deck) => {
-    console.log(deckName);
-    saveDeck(deck, deckName.current)
-      .then(() => {
-        setCardsInDeck([]);
-      })
-      .catch((error) => console.log(error));
-  };
-
-  function handleTrashCanDrop(cardToDelete) {
-    setCardsInDeck((prevCards) => prevCards.filter((card) => card._id !== cardToDelete._id));
-  }
-
   return (
     <>
       <div className="deck" ref={drop}>
-
         <div className="top-container-wrapper">
           <div className="top-container">
             <h3>Deck</h3>
-            <input type="text" placeholder="deckname" onChange={(e) => (deckName.current = e.target.value)} />
+            <input
+              type="text"
+              placeholder="deckname"
+              value={deckName}
+              onChange={(e) => setDeckName(e.target.value)}
+            />
           </div>
         </div>
 
         <div className="current-deck">
-          {cardsInDeck &&
-            cardsInDeck.map((card) => {
-              return <CardCompact key={card._id} card={card} count={card.count} />;
-            })}
+          {cardsInDeck.map((card) => (
+            <CardCompact key={card._id} card={card} count={card.count} />
+          ))}
         </div>
 
         <div className="bottom-bar-wrapper">
           <div className="deck-bottom">
-            <CardDropZone onDelete={handleTrashCanDrop} />
+            <CardDropZone onDelete={removeCard} />
             <button
-              onClick={() => {
-                onSave(cardsInDeck, deckName);
-              }}
+              onClick={saveDeck}
             >
-              Save deck
+              Save Deck
             </button>
           </div>
         </div>
-
       </div>
     </>
   );
