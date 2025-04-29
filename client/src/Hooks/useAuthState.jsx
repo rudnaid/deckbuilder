@@ -1,8 +1,6 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const AuthContext = createContext(null);
-
-const AuthProvider = ({ children }) => {
+const useAuthState = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -15,15 +13,15 @@ const AuthProvider = ({ children }) => {
           const userData = await fetchUserProfile(token);
           setUser(userData);
         } catch (error) {
-          console.error('Error loading user profile:', error);
           localStorage.removeItem('token');
+          throw new Error(error.message);
         }
       }
 
       setLoading(false);
     };
 
-    checkAuth();
+    checkAuth().then(() => {});
   }, []);
 
   const login = async (username, password) => {
@@ -74,12 +72,12 @@ const AuthProvider = ({ children }) => {
 
       localStorage.setItem('token', data.token);
 
+      const user = await fetchUserProfile(data.token);
+      setUser(user);
+
       return { success: true };
     } catch (error) {
-      return {
-        success: false,
-        error: error.message,
-      };
+      throw new Error(error.message || 'Registration failed');
     }
   };
 
@@ -89,37 +87,32 @@ const AuthProvider = ({ children }) => {
   };
 
   const fetchUserProfile = async (token) => {
-    const response = await fetch('/api/user/profile', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    try {
+      const response = await fetch('/api/user/profile', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch user data');
+      if (!response.ok) {
+        throw new Error('Failed to fetch user data');
+      }
+
+      return response.json();
+    } catch (error) {
+      throw new Error(error.message);
     }
-
-    return response.json();
   };
 
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        loading,
-        login,
-        register,
-        logout,
-        isAuthenticated: !!user,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+  return {
+    user,
+    loading,
+    login,
+    register,
+    logout,
+    isAuthenticated: !!user,
+  };
 };
 
-export default AuthProvider;
-
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export default useAuthState;
