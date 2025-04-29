@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { calculateTotalManaCost, calculateCraftingCost, collectRarityData } from '../../../Utils/utils.js';
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
+import { calculateCraftingCost, calculateTotalManaCost, collectRarityData } from '../../../Utils/utils.js';
 import './DeckInfo.css';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const saveDeck = (deck) => {
   const deckToSave = deck.map((card) => {
     return { cardId: card._id, count: card.count };
   });
-  return fetch("/api/deck/", {
-    method: "POST",
+  return fetch('/api/deck/', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      Authorization: `${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json',
+      Authorization: `${localStorage.getItem('token')}`,
     },
     body: JSON.stringify(deckToSave),
   }).then((res) => res.json());
@@ -31,7 +31,6 @@ const DeckInfo = ({ deck }) => {
     setTotalManaCost(() => calculateTotalManaCost(deck));
     setCraftingCost(() => calculateCraftingCost(deck));
     setRarityDistribution(() => collectRarityData(deck));
-
   }, [deck]);
 
   const onSave = async (deck) => {
@@ -46,46 +45,51 @@ const DeckInfo = ({ deck }) => {
     <div className="deckinfo">
       {cardsInDeck.length !== 0 ? (
         <>
-          <div className='total-mana-wrapper'>
+          <div className="total-mana-wrapper">
             Total Mana Cost
             <div>{totalManaCost}</div>
           </div>
-          <div className='crafting-cost-wrapper'>
+
+          <div className="crafting-cost-wrapper">
             Crafting Cost
             <div>{craftingCost}</div>
           </div>
-          <div className='rarity-pie'>
-          <Bar
-        data={rarityDistribution}
-        options={{
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            x: {
-              grid: {
-                display: false,
-              },
-            },
-            y: {
-              grid: {
-                display: false,
-              },
-              ticks: {
-                display: false,
-              },
-            },
-          },
-          plugins: {
-            legend: {
-              display: false,
-            },
-          },
-        }}/>
+
+          <div className="rarity-pie">
+            <Bar
+              data={rarityDistribution}
+              options={{
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                  x: {
+                    grid: {
+                      display: false,
+                    },
+                  },
+                  y: {
+                    grid: {
+                      display: false,
+                    },
+                    ticks: {
+                      display: false,
+                    },
+                  },
+                },
+                plugins: {
+                  legend: {
+                    display: false,
+                  },
+                },
+              }}
+            />
           </div>
+
           <button
             onClick={() => {
               onSave(cardsInDeck);
-            }}>
+            }}
+          >
             Save deck
           </button>
         </>
@@ -94,6 +98,6 @@ const DeckInfo = ({ deck }) => {
       )}
     </div>
   );
-}
+};
 
 export default DeckInfo;

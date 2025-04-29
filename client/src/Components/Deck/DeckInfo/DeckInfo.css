@@ -1,85 +1,85 @@
 .deckinfo {
-  display: flex;
-  height: 16.5vh;
-  justify-content: space-around;
-  align-items: center;
-  background-color: rgba(30, 30, 30, 0.9);
-  border-top: 1px solid #444;
-  position: relative;
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-  padding: 1rem;
-  color: white;
+    display: flex;
+    height: 16.5vh;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(30, 30, 30, 0.9);
+    border-top: 1px solid #444;
+    position: relative;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    color: white;
 }
 
 .deckinfo::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background-image: url('../../../assets/imgs/topbar.png');
-  background-size: 100% 100%;
-  z-index: 1;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background-image: url('../../../assets/images/topbar.png');
+    background-size: 100% 100%;
+    z-index: 1;
 }
 
 .deckinfo button {
-  background-color: #646cff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  font-family: 'BelweBold', sans-serif;
-  font-size: 1rem;
-  transition: all 0.3s;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
+    background-color: #646cff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-family: 'BelweBold', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
 
 .deckinfo button:hover {
-  background-color: #535bf2;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: #535bf2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .total-mana-wrapper, .crafting-cost-wrapper {
-  background-color: rgba(20, 20, 20, 0.8);
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid #444;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  min-width: 150px;
+    background-color: rgba(20, 20, 20, 0.8);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #444;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px;
 }
 
 .total-mana-wrapper::before, .crafting-cost-wrapper::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background-image: url('../../../assets/imgs/topbar.png');
-  background-size: 100% 100%;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-image: url('../../../assets/images/topbar.png');
+    background-size: 100% 100%;
 }
 
 .total-mana-wrapper div, .crafting-cost-wrapper div {
-  font-size: 1.5rem;
-  margin-top: 0.5rem;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .rarity-pie {
-  height: 100%;
-  width: 40%;
-  max-height: 150px;
-  position: relative;
-  background-color: rgba(20, 20, 20, 0.6);
-  border-radius: 8px;
-  padding: 0.5rem;
-  border: 1px solid #444;
+    height: 100%;
+    width: 40%;
+    max-height: 150px;
+    position: relative;
+    background-color: rgba(20, 20, 20, 0.6);
+    border-radius: 8px;
+    padding: 0.5rem;
+    border: 1px solid #444;
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 import './Auth.css';
 
@@ -30,7 +30,7 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -38,13 +38,13 @@ function Register() {
     setIsLoading(true);
 
     const result = await registerUser(username, password);
-      
+
     if (result.success) {
       navigate('/deckbuilder');
     } else {
       setError(result.error || 'Registration failed');
     }
-    
+
     setIsLoading(false);
   };
 
@@ -53,7 +53,9 @@ function Register() {
       <div className="auth-form">
         <h2>Register</h2>
         {error && <div className="auth-error">{error}</div>}
+
         <form onSubmit={handleSubmit}>
+
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
@@ -64,6 +66,7 @@ function Register() {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -74,6 +77,7 @@ function Register() {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
@@ -84,13 +88,11 @@ function Register() {
               required
             />
           </div>
-          <button 
-            type="submit" 
-            className="auth-button" 
-            disabled={isLoading}
-          >
+
+          <button type="submit" className="auth-button" disabled={isLoading}>
             {isLoading ? 'Registering...' : 'Register'}
           </button>
+
         </form>
         <div className="auth-link">
           Already have an account? <Link to="/login">Login</Link>

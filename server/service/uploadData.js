@@ -1,5 +1,5 @@
 import Card from '../model/Card.js';
-import { readFileSync } from 'fs'
+import { readFileSync } from 'fs';
 
 function uploadData() {
   try {
@@ -9,7 +9,7 @@ function uploadData() {
       const card = await Card.create(element);
       console.log(idx);
     });
-  } catch(error) {
+  } catch (error) {
     console.error(error);
   }
 }

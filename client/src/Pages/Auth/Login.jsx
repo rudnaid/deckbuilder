@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 import './Auth.css';
 
@@ -20,13 +20,13 @@ function Login() {
     setIsLoading(true);
 
     const result = await login(username, password);
-    
+
     if (result.success) {
       navigate(from, { replace: true });
     } else {
       setError(result.error || 'Login failed');
     }
-    
+
     setIsLoading(false);
   };
 
@@ -35,6 +35,7 @@ function Login() {
       <div className="auth-form">
         <h2>Login</h2>
         {error && <div className="auth-error">{error}</div>}
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -46,6 +47,7 @@ function Login() {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -56,14 +58,12 @@ function Login() {
               required
             />
           </div>
-          <button 
-            type="submit" 
-            className="auth-button" 
-            disabled={isLoading}
-          >
+
+          <button type="submit" className="auth-button" disabled={isLoading}>
             {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </form>
+
         <div className="auth-link">
           Don't have an account? <Link to="/register">Register</Link>
         </div>

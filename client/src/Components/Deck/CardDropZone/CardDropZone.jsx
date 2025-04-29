@@ -1,12 +1,10 @@
-import { useDrop } from "react-dnd";
+import { useDrop } from 'react-dnd';
 
-const Trashcan = ({ onDelete }) => {
-
+const CardDropZone = ({ onDelete }) => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: 'CARD-COMPACT',
     drop: (item) => {
       onDelete(item.card);
-
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -16,13 +14,9 @@ const Trashcan = ({ onDelete }) => {
 
   return (
     <div className="trash">
-      <div
-        ref={drop}
-        >
-        ❌
-      </div>
+      <div ref={drop}>❌</div>
     </div>
-  )
-}
+  );
+};
 
-export default Trashcan;
+export default CardDropZone;

@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+
 const { Schema, model } = mongoose;
 
 const deckSchema = new Schema({
@@ -7,12 +8,11 @@ const deckSchema = new Schema({
     {
       cardId: {
         type: Schema.Types.ObjectId,
-        ref: 'Card'
-      }
-      ,
+        ref: 'Card',
+      },
       count: Number,
     },
   ],
 });
 
-export default model("DeckBuilder", deckSchema);
+export default model('DeckBuilder', deckSchema);

@@ -1,40 +1,38 @@
-import {useRef, useState} from "react";
-import {useDrop} from "react-dnd";
-import CardCompact from "../../Cards/CardCompact/CardCompact.jsx";
-import "./DeckBuilder.css";
-import Trashcan from "../../Trashcan.jsx";
+import { useRef, useState } from 'react';
+import { useDrop } from 'react-dnd';
+import CardCompact from '../../Cards/CardCompact/CardCompact.jsx';
+import './DeckBuilder.css';
+import CardDropZone from '../CardDropZone/CardDropZone.jsx';
 
 const saveDeck = async (deck, deckname) => {
   const deckToSave = {
     name: deckname,
     cards: [
       ...deck.map((card) => {
-        return {cardId: card._id, count: card.count};
+        return { cardId: card._id, count: card.count };
       }),
     ],
   };
   console.log(deckToSave);
-  return fetch("/api/deck/", {
-    method: "POST",
+  return fetch('/api/deck/', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(deckToSave),
   }).then((res) => res.json());
 };
 
-const DeckBuilder = ({onDrop}) => {
+const DeckBuilder = ({ onDrop }) => {
   const [cardsInDeck, setCardsInDeck] = useState([]);
   const deckName = useRef();
-  const [{canDrop, isOver}, drop] = useDrop(() => ({
-    accept: "CARD",
+  const [{ canDrop, isOver }, drop] = useDrop(() => ({
+    accept: 'CARD',
     drop: (item) => {
       onDrop(item);
 
       setCardsInDeck((prevCards) => {
-        const cardIndex = prevCards.findIndex(
-          (card) => card._id === item.card._id
-        );
+        const cardIndex = prevCards.findIndex((card) => card._id === item.card._id);
 
         if (cardIndex !== -1) {
           if (prevCards[cardIndex].count === 2) {
@@ -42,12 +40,10 @@ const DeckBuilder = ({onDrop}) => {
           }
 
           return prevCards.map((card, index) =>
-            index === cardIndex
-              ? {...card, count: card.count ? card.count + 1 : 2}
-              : card
+            index === cardIndex ? { ...card, count: card.count ? card.count + 1 : 2 } : card
           );
         } else {
-          return [...prevCards, {...item.card, count: 1}];
+          return [...prevCards, { ...item.card, count: 1 }];
         }
       });
     },
@@ -67,38 +63,30 @@ const DeckBuilder = ({onDrop}) => {
   };
 
   function handleTrashCanDrop(cardToDelete) {
-    setCardsInDeck((prevCards) =>
-      prevCards.filter((card) => card._id !== cardToDelete._id)
-    );
+    setCardsInDeck((prevCards) => prevCards.filter((card) => card._id !== cardToDelete._id));
   }
 
   return (
     <>
-      <div
-        className="deck"
-        ref={drop}
-      >
+      <div className="deck" ref={drop}>
+
         <div className="top-container-wrapper">
           <div className="top-container">
             <h3>Deck</h3>
-            <input
-              type="text"
-              placeholder="deckname"
-              onChange={(e) => (deckName.current = e.target.value)}
-            />
+            <input type="text" placeholder="deckname" onChange={(e) => (deckName.current = e.target.value)} />
           </div>
         </div>
+
         <div className="current-deck">
           {cardsInDeck &&
             cardsInDeck.map((card) => {
-              return (
-                <CardCompact key={card._id} card={card} count={card.count}/>
-              );
+              return <CardCompact key={card._id} card={card} count={card.count} />;
             })}
         </div>
+
         <div className="bottom-bar-wrapper">
           <div className="deck-bottom">
-            <Trashcan onDelete={handleTrashCanDrop}/>
+            <CardDropZone onDelete={handleTrashCanDrop} />
             <button
               onClick={() => {
                 onSave(cardsInDeck, deckName);
@@ -108,9 +96,10 @@ const DeckBuilder = ({onDrop}) => {
             </button>
           </div>
         </div>
+
       </div>
     </>
   );
-}
+};
 
 export default DeckBuilder;

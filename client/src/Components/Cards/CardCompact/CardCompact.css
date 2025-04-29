@@ -1,65 +1,65 @@
 .cardCompact {
-  right: -10px;
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin-top: 3px;
-  background: url('../../../assets/imgs/side.png') right ;
-  padding-right: 10px;
+    right: -10px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 3px;
+    background: url('../../../assets/images/side.png') right;
+    padding-right: 10px;
 }
 
 .manaCrystalWrapper {
-  position: absolute;
-  left: -16px;
-  width: 40px;
-  height: 40px;
-  z-index: 1;
+    position: absolute;
+    left: -16px;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
 }
 
 .manaCrystalWrapper img {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .cardImageWrapper {
-  position: relative;
-  width: 180px;
-  height: 40px;
-  margin-left: 5px;
-  overflow: hidden;
+    position: relative;
+    width: 180px;
+    height: 40px;
+    margin-left: 5px;
+    overflow: hidden;
 }
 
 .cardImageWrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .manaCost {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2em;
-  color: white;
-  text-shadow: 1px 1px 2px black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    color: white;
+    text-shadow: 1px 1px 2px black;
 }
 
 .cardName {
-  position: absolute;
-  bottom: 20%;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  margin-left: 10px;
-  /* font-size: 0.9em; */
-  text-shadow: 2px 2px 2px black;
+    position: absolute;
+    bottom: 20%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    margin-left: 10px;
+    /* font-size: 0.9em; */
+    text-shadow: 2px 2px 2px black;
 }
 
 .count {
-  margin-left: 10px;
-  font-size: 1.1em;
-  color: rgb(255, 255, 255);
+    margin-left: 10px;
+    font-size: 1.1em;
+    color: rgb(255, 255, 255);
 
 }

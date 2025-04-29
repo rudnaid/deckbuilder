@@ -1,17 +1,17 @@
 import { useDrag } from 'react-dnd';
 import './CardCompact.css';
+import manaCrystal from '../../../assets/images/mana-crystal.png';
 
 const CardCompact = ({ card, count }) => {
   const [, drag] = useDrag(() => ({
     type: 'CARD-COMPACT',
-    item: { card }
+    item: { card },
   }));
 
   return (
     <div className="cardCompact" ref={drag}>
-
       <div className="manaCrystalWrapper">
-        <img src="/mana-crystal.png" alt="mana crystal" />
+        <img src={manaCrystal} alt="mana crystal" />
         <div className="manaCost">{card.manaCost}</div>
       </div>
 
@@ -23,6 +23,6 @@ const CardCompact = ({ card, count }) => {
       <div className="count">{count}</div>
     </div>
   );
-}
+};
 
 export default CardCompact;

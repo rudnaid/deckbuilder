@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, useContext } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const AuthContext = createContext(null);
 
@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       const token = localStorage.getItem('token');
-      
+
       if (token) {
         try {
           const userData = await fetchUserProfile(token);
@@ -19,10 +19,10 @@ const AuthProvider = ({ children }) => {
           localStorage.removeItem('token');
         }
       }
-      
+
       setLoading(false);
     };
-    
+
     checkAuth();
   }, []);
 
@@ -37,21 +37,21 @@ const AuthProvider = ({ children }) => {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Login failed');
       }
 
       localStorage.setItem('token', data.token);
-      
+
       const userData = await fetchUserProfile(data.token);
       setUser(userData);
-      
+
       return { success: true };
     } catch (error) {
       return {
         success: false,
-        error: error.message
+        error: error.message,
       };
     }
   };
@@ -67,7 +67,7 @@ const AuthProvider = ({ children }) => {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Registration failed');
       }
@@ -78,7 +78,7 @@ const AuthProvider = ({ children }) => {
     } catch (error) {
       return {
         success: false,
-        error: error.message
+        error: error.message,
       };
     }
   };
@@ -91,33 +91,35 @@ const AuthProvider = ({ children }) => {
   const fetchUserProfile = async (token) => {
     const response = await fetch('/api/user/profile', {
       headers: {
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     });
-    
+
     if (!response.ok) {
       throw new Error('Failed to fetch user data');
     }
-    
+
     return response.json();
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      loading,
-      login,
-      register,
-      logout,
-      isAuthenticated: !!user
-    }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        login,
+        register,
+        logout,
+        isAuthenticated: !!user,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
-}
+};
 
 export default AuthProvider;
 
 export const useAuth = () => {
   return useContext(AuthContext);
-}; 
+};
