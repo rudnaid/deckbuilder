@@ -29,9 +29,8 @@ services:
       deckbuilder-mongodb:
         condition: service_healthy
     environment:
-      - NODE_ENV=production
-      - DATABASE_URL=mongodb://deckbuilder-mongodb:27017/deckbuilder
-      - SERVER_PORT=3000
+      - DATABASE_URL=$DATABASE_URL
+      - SERVER_PORT=$SERVER_PORT
     restart: unless-stopped
 
   deckbuilder-frontend:
