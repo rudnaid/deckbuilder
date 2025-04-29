@@ -19,6 +19,8 @@
 
 **Hearthstone Deck Builder** is a web application designed to help you build the ultimate deck for the popular game Hearthstone by Blizzard. The application's database includes all cards, obtained from the **official API** provided by Blizzard, to ensure accurate information.
 
+![Screenshot 2025-04-29 at 12 12 51](https://github.com/user-attachments/assets/b15c58be-3c57-4015-be8e-7124cf124952)
+
 ### Features
 
 - **Filter** the cards based on **class**, **rarity**, **type**, **mana cost**.
@@ -26,6 +28,8 @@
 - **Statistics** display of your **Deck** on the bottom, such as **Total Mana Cost**, amount of **Dust** needed for crafting, and distribution of rarity.
 - **Lazy Loading** of cards in an infinitely scrollable box.
 - **Authentication and user management**: create your own account for secure access to the database only available to *authenticated users*.
+
+![Screenshot 2025-04-29 at 12 13 43](https://github.com/user-attachments/assets/1dc98361-837e-4a36-aa07-e5cb31118fa6)
 
 The entire application is containerized using **Docker Compose**, enabling seamless **deployment** and **scalability**.
 
