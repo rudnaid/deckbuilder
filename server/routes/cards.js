@@ -1,7 +1,7 @@
-import {Router} from 'express';
+import { Router } from 'express';
 import Card from '../model/Card.js';
 import createPipeline from '../service/pipeline.js';
-import authMiddleware from "../auth/authMiddleware.js";
+import authMiddleware from '../auth/authMiddleware.js';
 
 const cardsRouter = Router();
 
@@ -10,11 +10,13 @@ cardsRouter.get('/', authMiddleware, async (req, res) => {
     if (param || param === '0') {
       if (param.includes(',')) {
         const values = param.split(',').map(Number);
-        return values.length > 1 ? {$in: values} : values[0];
+
+        return values.length > 1 ? { $in: values } : values[0];
       }
-      return parseInt(param, 10)
+
+      return parseInt(param, 10);
     } else {
-      return {$exists: true};
+      return { $exists: true };
     }
   };
 
@@ -27,8 +29,9 @@ cardsRouter.get('/', authMiddleware, async (req, res) => {
     classId,
     manaCost,
     rarityId,
-    cardTypeId
-  }
+    cardTypeId,
+  };
+
   try {
     const limit = parseInt(req.query.limit);
     const page = parseInt(req.query.page);
@@ -40,7 +43,7 @@ cardsRouter.get('/', authMiddleware, async (req, res) => {
 
     res.status(200).json(cards);
   } catch (error) {
-    res.status(404).json({error: 'File not found'});
+    res.status(404).json({ error: 'File not found' });
   }
 });
 

@@ -1,20 +1,22 @@
-import {useInfiniteQuery} from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 const LIMIT = 20;
 
-const fetchCards = async ({pageParam = 1, selected = "", filter = ""}) => {
+const fetchCards = async ({ pageParam = 1, selected = '', filter = '' }) => {
   try {
     const token = localStorage.getItem('token');
 
-    const filterPrefix = (selected && filter) ? '&' : '';
+    const filterPrefix = selected && filter ? '&' : '';
 
     const response = await fetch(`/api/cards?page=${pageParam}&limit=${LIMIT}${selected}${filterPrefix}${filter}`, {
-      method: "GET",
-      headers: {"Authorization": `Bearer ${token}`}
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}` },
     });
+
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
+
     return response.json();
   } catch (error) {
     console.error(error);
@@ -24,7 +26,7 @@ const fetchCards = async ({pageParam = 1, selected = "", filter = ""}) => {
 const useInfiniteCards = (selected, filter) => {
   const query = useInfiniteQuery({
     queryKey: ['cards', selected, filter],
-    queryFn: ({pageParam = 1}) => fetchCards({pageParam, selected, filter}),
+    queryFn: ({ pageParam = 1 }) => fetchCards({ pageParam, selected, filter }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length === LIMIT ? allPages.length + 1 : undefined;
@@ -32,6 +34,6 @@ const useInfiniteCards = (selected, filter) => {
   });
 
   return query;
-}
+};
 
 export default useInfiniteCards;

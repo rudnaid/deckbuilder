@@ -1,96 +1,96 @@
 .filter-settings {
-  grid-column: span 3;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: rgba(30, 30, 30, 0.9);
-  overflow-x: auto;
-  padding: 1rem;
-  max-height: fit-content;
-  border-radius: 0 0 1rem 1rem;
-  border: 1px solid #444;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  position: relative;
-  overflow: hidden;
-  color: #ddd;
+    grid-column: span 3;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgba(30, 30, 30, 0.9);
+    overflow-x: auto;
+    padding: 1rem;
+    max-height: fit-content;
+    border-radius: 0 0 1rem 1rem;
+    border: 1px solid #444;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    color: #ddd;
 }
 
 .filter-settings::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background-image: url('../../assets/imgs/bottombar.png');
-  background-size: 100% 100%;
-  z-index: 1;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background-image: url('../../assets/images/bottombar.png');
+    background-size: 100% 100%;
+    z-index: 1;
 }
 
 .manaCostWrapper {
-  display: flex;
-  gap: 0.5rem;
-  transition: transform 0.2s ease;
+    display: flex;
+    gap: 0.5rem;
+    transition: transform 0.2s ease;
 }
 
 .manaCostWrapper:hover {
-  cursor: pointer;
-  transform: translateY(-3px);
+    cursor: pointer;
+    transform: translateY(-3px);
 }
 
 .filter-settings form {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  width: fit-content;
-  gap: 1rem;
-  z-index: 2;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: fit-content;
+    gap: 1rem;
+    z-index: 2;
 }
 
-.filter-settings select, 
+.filter-settings select,
 .filter-settings input[type="text"],
 .filter-settings input[type="search"] {
-  background-color: rgba(20, 20, 20, 0.8);
-  border: 1px solid #444;
-  border-radius: 5px;
-  padding: 0.5rem;
-  color: #fff;
-  font-family: 'BelweBold', sans-serif;
-  transition: all 0.2s ease;
+    background-color: rgba(20, 20, 20, 0.8);
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 0.5rem;
+    color: #fff;
+    font-family: 'BelweBold', sans-serif;
+    transition: all 0.2s ease;
 }
 
-.filter-settings select:focus, 
+.filter-settings select:focus,
 .filter-settings input[type="text"]:focus,
 .filter-settings input[type="search"]:focus {
-  border-color: #646cff;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.2);
+    border-color: #646cff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.2);
 }
 
 .manacost {
-  display: grid;
-  place-items: center; /* Centers content horizontally and vertically */
-  position: relative;
-  transition: transform 0.2s ease;
+    display: grid;
+    place-items: center; /* Centers content horizontally and vertically */
+    position: relative;
+    transition: transform 0.2s ease;
 }
 
 .manacost:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .manacost img {
-  grid-row: 1;
-  grid-column: 1;
-  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+    grid-row: 1;
+    grid-column: 1;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
 }
 
 .manacost div {
-  grid-row: 1;
-  grid-column: 1;
-  font-size: 1.5em;
-  color: white;
-  text-shadow: 1px 1px 3px black;
-  font-family: 'BelweBold', sans-serif;
-  z-index: 2;
+    grid-row: 1;
+    grid-column: 1;
+    font-size: 1.5em;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+    font-family: 'BelweBold', sans-serif;
+    z-index: 2;
 }

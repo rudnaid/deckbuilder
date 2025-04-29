@@ -1,12 +1,12 @@
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { useState } from "react";
-import CardDisplay from "../../Components/Cards/CardDisplay/CardDisplay.jsx";
-import DeckBuilder from "../../Components/Deck/DeckBuilder/DeckBuilder.jsx";
-import DeckInfo from "../../Components/Deck/DeckInfo/DeckInfo.jsx";
-import ClassSelector from "../../Components/ClassSelector/ClassSelector.jsx";
-import CardFilter from "../../Components/CardFilter/CardFilter.jsx";
-import "./LandingPage.css";
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { useState } from 'react';
+import CardDisplay from '../../Components/Cards/CardDisplay/CardDisplay.jsx';
+import DeckBuilder from '../../Components/Deck/DeckBuilder/DeckBuilder.jsx';
+import DeckInfo from '../../Components/Deck/DeckInfo/DeckInfo.jsx';
+import ClassSelector from '../../Components/ClassSelector/ClassSelector.jsx';
+import CardFilter from '../../Components/CardFilter/CardFilter.jsx';
+import './LandingPage.css';
 
 function LandingPage() {
   const [cardsInDeck, setCardsInDeck] = useState([]);
@@ -19,7 +19,7 @@ function LandingPage() {
 
   const handleSelect = (chosenClass) => {
     setSelectedClass(`&classId=${chosenClass},12`);
-  }
+  };
 
   return (
     <>
@@ -38,7 +38,6 @@ function LandingPage() {
         <div className="bottom-container">
           <DeckInfo deck={cardsInDeck} />
         </div>
-
       </DndProvider>
     </>
   );

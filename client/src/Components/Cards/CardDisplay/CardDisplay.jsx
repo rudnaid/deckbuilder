@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import CardsContainer from '../CardsContainer/CardsContainer.jsx';
-import { useInView } from "react-intersection-observer";
+import { useInView } from 'react-intersection-observer';
 import useInfiniteCards from '../../../Hooks/useInfiniteCards';
 
 const CardDisplay = ({ selected, filter }) => {
@@ -29,6 +29,6 @@ const CardDisplay = ({ selected, filter }) => {
       <CardsContainer cards={allCards} refe={ref} isFetchingNextPage={isFetchingNextPage} />
     </div>
   );
-}
+};
 
 export default CardDisplay;

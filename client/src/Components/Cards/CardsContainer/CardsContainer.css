@@ -1,22 +1,22 @@
 .cards-container {
-  flex: 1;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(200px, 50px));
-	gap: 10px;
-	overflow-y: scroll;
-  scrollbar-width: none;
-	overflow-x: hidden;
-	height: 70.5vh;
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 50px));
+    gap: 10px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    overflow-x: hidden;
+    height: 70.5vh;
 }
 
 @media (min-width: 1921px) {
-  .cards-container {
-    height: 80vh;
-  }
+    .cards-container {
+        height: 80vh;
+    }
 }
 
 @media (min-width: 2560px) {
-  .cards-container {
-    height: 85vh;
-  }
+    .cards-container {
+        height: 85vh;
+    }
 }

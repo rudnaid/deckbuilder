@@ -1,26 +1,26 @@
 export function calculateTotalManaCost(deck) {
-	let totalManaCost = 0;
+  let totalManaCost = 0;
 
-	deck.forEach((card) => {
-		totalManaCost += card.manaCost;
-	});
+  deck.forEach((card) => {
+    totalManaCost += card.manaCost;
+  });
 
-	return totalManaCost;
+  return totalManaCost;
 }
 
 export function collectRarityData(deck) {
   const rarityData = {
-    labels: ["Free", "Common", "Rare", "Epic", "Legendary"],
+    labels: ['Free', 'Common', 'Rare', 'Epic', 'Legendary'],
     datasets: [
       {
         label: 'Card Rarity Distribution',
         data: [0, 0, 0, 0, 0],
         backgroundColor: [
-          'rgba(255, 255, 255, 0.9)',  // Free
-          'rgba(120, 251, 76, 0.9)',   // Common
-          'rgba(47, 110, 214, 0.9)',   // Rare
-          'rgba(151, 61, 229, 0.9)',   // Epic
-          'rgba(239, 135, 51, 0.9)',   // Legendary
+          'rgba(255, 255, 255, 0.9)', // Free
+          'rgba(120, 251, 76, 0.9)', // Common
+          'rgba(47, 110, 214, 0.9)', // Rare
+          'rgba(151, 61, 229, 0.9)', // Epic
+          'rgba(239, 135, 51, 0.9)', // Legendary
         ],
         borderWidth: 0,
       },

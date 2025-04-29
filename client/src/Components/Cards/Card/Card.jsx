@@ -19,6 +19,6 @@ const Card = ({ card }) => {
       <img src={card.image} alt="card-img"></img>
     </div>
   );
-}
+};
 
 export default Card;
