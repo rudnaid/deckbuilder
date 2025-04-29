@@ -1,4 +1,4 @@
-import { encodeDeckString } from "../Utils/deckStringCodec";
+import { encodeDeckString } from '../../../Utils/deckStringCodec.js';
 
 function DeckString({ deck }) {
   return (
@@ -7,7 +7,7 @@ function DeckString({ deck }) {
         <div>{encodeDeckString(deck)}</div>
       </div>
     </>
-  )
+  );
 }
 
 export default DeckString;
