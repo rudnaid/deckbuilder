@@ -1,6 +1,6 @@
 import { useDrag } from 'react-dnd';
-import './CardCompact.css';
 import manaCrystal from '../../../assets/images/mana-crystal.png';
+import './CardCompact.css';
 
 const CardCompact = ({ card, count }) => {
   const [, drag] = useDrag(() => ({

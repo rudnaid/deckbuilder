@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import CardCompact from '../../Cards/CardCompact/CardCompact.jsx';
-import './DeckBuilder.css';
 import CardDropZone from '../CardDropZone/CardDropZone.jsx';
+import { useDeckContext } from '../../../Context/DeckContext.jsx';
+import './DeckBuilder.css';
 
 const saveDeck = async (deck, deckname) => {
   const deckToSave = {

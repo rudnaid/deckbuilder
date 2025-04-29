@@ -1,4 +1,4 @@
-import { encodeDeckString } from '../../../Utils/deckStringCodec.js';
+import { encodeDeckString } from '../../../Utils/helperUtils.js';
 
 function DeckString({ deck }) {
   return (

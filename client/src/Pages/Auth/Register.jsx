@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 import './Auth.css';
 
-function Register() {
+const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -100,6 +100,6 @@ function Register() {
       </div>
     </div>
   );
-}
+};
 
 export default Register;

@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 import './Auth.css';
 
-function Login() {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -70,6 +70,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

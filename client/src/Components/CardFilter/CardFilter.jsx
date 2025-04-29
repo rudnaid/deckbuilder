@@ -1,12 +1,12 @@
 import { useRef } from 'react';
 import useFetchData from '../../Hooks/useFetchData';
-import { createQueryString } from '../../Utils/utils.js';
+import { createQueryString } from '../../Utils/helperUtils.js';
 import SelectTemplate from './SelectTemplate.jsx';
 import ManaCostSelector from './ManaCostSelector.jsx';
 import './CardFilter.css';
 
 const CardFilter = ({ setFilter }) => {
-  const filterOptions = useRef();
+  const { filterOptions } = useRef();
   const { data: metaData, loading, error } = useFetchData('/api/meta');
 
   const handleFilter = (type, value) => {

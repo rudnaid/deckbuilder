@@ -1,29 +1,17 @@
 import { useEffect, useState } from 'react';
+import { fetchFromApi } from '../Utils/apiUtils.js';
 
 const useFetchData = (url) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
 
       try {
-        const token = localStorage.getItem('token');
-
-        const response = await fetch(url, {
-          method: 'GET',
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (!response.ok) {
-          setError(response.status);
-          return;
-        }
-
-        const data = await response.json();
-
+        const data = await fetchFromApi(url);
         setData(data);
       } catch (error) {
         setError(error);
@@ -32,7 +20,7 @@ const useFetchData = (url) => {
       }
     }
 
-    fetchData();
+    fetchData().then(() => {});
   }, [url]);
 
   return { data, error, loading };
