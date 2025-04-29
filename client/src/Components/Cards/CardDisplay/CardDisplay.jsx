@@ -15,7 +15,7 @@ const CardDisplay = ({ selected, filter }) => {
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      fetchNextPage().then(() => {});
     }
   }, [fetchNextPage, inView]);
 

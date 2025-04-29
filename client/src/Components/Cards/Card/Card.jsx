@@ -13,8 +13,8 @@ const Card = ({ card }) => {
   return (
     <div
       ref={drag}
-      style={{opacity: isDragging ? 0.5 : 1}}
-      className={"card"}
+      style={{ opacity: isDragging ? 0.5 : 1 }}
+      className={'card'}
     >
       <img src={card.image} alt="card-img"></img>
     </div>
