@@ -24,7 +24,7 @@ const fetchCards = async ({ pageParam = 1, selected = '', filter = '' }) => {
 };
 
 const useInfiniteCards = (selected, filter) => {
-  const query = useInfiniteQuery({
+  return useInfiniteQuery({
     queryKey: ['cards', selected, filter],
     queryFn: ({ pageParam = 1 }) => fetchCards({ pageParam, selected, filter }),
     initialPageParam: 1,
@@ -32,8 +32,6 @@ const useInfiniteCards = (selected, filter) => {
       return lastPage.length === LIMIT ? allPages.length + 1 : undefined;
     },
   });
-
-  return query;
 };
 
 export default useInfiniteCards;
