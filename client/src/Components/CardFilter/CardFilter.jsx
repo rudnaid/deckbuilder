@@ -6,7 +6,7 @@ import ManaCostSelector from './ManaCostSelector.jsx';
 import './CardFilter.css';
 
 const CardFilter = ({ setFilter }) => {
-  const { filterOptions } = useRef();
+  const filterOptions = useRef();
   const { data: metaData, loading, error } = useFetchData('/api/meta');
 
   const handleFilter = (type, value) => {
