@@ -10,6 +10,7 @@
     - [Prerequisites](#prerequisites)
     - [Installation Steps](#installation-steps)
 - [Usage](#usage)
+- [Upcoming Features](#upcoming-features)
 - [Acknowledgments](#acknowledgments)
 
 </details>
@@ -125,6 +126,14 @@ To simplify setup, an example `.env` file with the necessary **environment varia
     - When you are ready, press **Save Deck** to have your new Deck saved to the database.
 
 ---
+
+## Upcoming Features
+
+- Page for managing saved decks
+- Improved class selection screen
+- Fully responsive design
+- Performance improvements
+- Error handling overhaul
 
 ## Acknowledgments
 
