@@ -14,5 +14,5 @@ export const DeckProvider = ({ children }) => {
 };
 
 export const useDeckContext = () => {
-   return useContext(DeckContext);
+  return useContext(DeckContext);
 };
