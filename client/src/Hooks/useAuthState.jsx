@@ -21,7 +21,8 @@ const useAuthState = () => {
       setLoading(false);
     };
 
-    checkAuth().then(() => {});
+    checkAuth().then(() => {
+    });
   }, []);
 
   const login = async (username, password) => {
