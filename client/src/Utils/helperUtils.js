@@ -1,3 +1,5 @@
+import { decode, encode } from 'deckstrings';
+
 export function calculateTotalManaCost(deck) {
   let totalManaCost = 0;
 
@@ -47,8 +49,6 @@ export const createQueryString = (filters) => {
   const queryString = new URLSearchParams(filters);
   return queryString.toString();
 };
-
-import { decode, encode } from 'deckstrings';
 
 export function encodeDeckString(deck) {
   return encode(deck);

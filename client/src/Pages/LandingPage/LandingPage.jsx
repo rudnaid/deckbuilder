@@ -9,7 +9,7 @@ import CardFilter from '../../Components/CardFilter/CardFilter.jsx';
 import { DeckProvider } from '../../Context/DeckContext.jsx';
 import './LandingPage.css';
 
-function LandingPage() {
+const LandingPage = () => {
   const [selectedClass, setSelectedClass] = useState('');
   const [filterQueryString, setFilterQueryString] = useState('');
 
@@ -41,6 +41,6 @@ function LandingPage() {
       </DndProvider>
     </>
   );
-}
+};
 
 export default LandingPage;

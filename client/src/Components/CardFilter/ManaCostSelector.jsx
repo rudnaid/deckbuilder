@@ -1,6 +1,6 @@
 import manaCrystal from '../../assets/images/mana-crystal.png';
 
-export const ManaCostSelector = ({ onClick }) => {
+const ManaCostSelector = ({ onClick }) => {
   const totalCost = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (

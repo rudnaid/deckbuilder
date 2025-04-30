@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext.jsx';
 import './HomePage.css';
 
-function HomePage() {
+const HomePage = () => {
   const { isAuthenticated } = useAuth();
 
   return (
@@ -49,6 +49,6 @@ function HomePage() {
       </div>
     </div>
   );
-}
+};
 
 export default HomePage;

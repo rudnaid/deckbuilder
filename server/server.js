@@ -19,7 +19,8 @@ const connectWithRetry = async () => {
   }
 };
 
-connectWithRetry();
+connectWithRetry().then(() => {
+});
 
 app.use(cors());
 app.use(express.json());
